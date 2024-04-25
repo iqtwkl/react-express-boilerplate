@@ -1,5 +1,6 @@
 import express, {Express, Request, Response} from "express";
-import path from 'path'
+import path from 'path';
+import { apiRoutes } from './src/routes/api'
 
 export class Server {
 
@@ -10,9 +11,7 @@ export class Server {
     
         this.app.use(express.static(path.resolve("./") + "/build/frontend"));
     
-        this.app.get("/api", (req: Request, res: Response): void => {
-            res.send("You have reached the API!");
-        });
+        this.app.use("/api", apiRoutes);
     
         this.app.get("*", (req: Request, res: Response): void => {
             res.sendFile(path.resolve("./") + "/build/frontend/index.html");
