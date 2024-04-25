@@ -11,7 +11,9 @@
         "forceConsistentCasingInFileNames": true,
       },
       "include": [
-        "**.tsx"
+        "**.ts",
+        "**.tsx",
+        "**.jsx"
       ],
       "exclude": [
         "./frontend"
