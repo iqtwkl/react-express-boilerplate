@@ -1,4 +1,5 @@
 import express, {Request, Response} from 'express';
+import { authRoutes } from './auth';
 
 export const apiRoutes = express.Router();
 
@@ -15,3 +16,5 @@ apiRoutes.get('/', (req: Request, res: Response): void => {
  * apiRoutes.use(userRoute)
  * 
  * **/
+
+apiRoutes.use(authRoutes);

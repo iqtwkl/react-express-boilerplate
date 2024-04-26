@@ -1,6 +1,9 @@
 import express, {Express, Request, Response} from "express";
 import path from 'path';
-import { apiRoutes } from './src/routes/api'
+import { apiRoutes } from './src/routes/api';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOutput from "./swagger_output.json";
 
 export class Server {
 
@@ -19,7 +22,43 @@ export class Server {
     }
 
     public start(port: number): void {
+        const options = {
+            definition: {
+              openapi: "3.1.0",
+              info: {
+                title: "API with Swagger",
+                version: "0.1.0",
+                description:
+                  "This is a simple CRUD API application made with Express and documented with Swagger",
+                license: {
+                  name: "MIT",
+                  url: "https://spdx.org/licenses/MIT.html",
+                },
+                contact: {
+                  name: "Iqbal Tawakal",
+                  url: "https://www.linkedin.com/in/iqbaltaws/",
+                  email: "iqtwkl@gmail.com",
+                },
+              },
+              servers: [
+                {
+                  url: `http://localhost:${port}`,
+                },
+              ],
+            },
+            apis: ["./src/routes/api/*.ts"],
+        };
+          
+        const specs = swaggerJsdoc(options);
+        
+        this.app.use(
+            "/api-docs",
+            swaggerUi.serve,
+            swaggerUi.setup(swaggerOutput)
+        );
+
         this.app.listen(port, () => console.log(`Server listening on port ${port}!`));
+        console.log(this.app._router.stack);
     }
 
 }
