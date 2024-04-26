@@ -6,6 +6,7 @@
         "target": "es6",
         "moduleResolution": "node",
         "esModuleInterop": true,
+        "resolveJsonModule": true,
         "lib": ["es6"],
         "allowJs": true,
         "forceConsistentCasingInFileNames": true,
@@ -13,7 +14,8 @@
       "include": [
         "**.ts",
         "**.tsx",
-        "**.jsx"
+        "**.jsx",
+        "./app/src/swagger_output.json"
       ],
       "exclude": [
         "./frontend"

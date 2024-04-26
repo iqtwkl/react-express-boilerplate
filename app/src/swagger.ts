@@ -18,7 +18,7 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:8080',
+            url: 'http://localhost:8080/api/',
             description: ''
         },
     ],
@@ -28,6 +28,17 @@ const doc = {
                 type: 'http',
                 scheme: 'bearer',
             }
+        },
+        schemas: {
+            loginInputSchema: {
+                $username: 'username',
+                $password: 'somepassword',
+            },
+            loginOutputSchema: {
+                status: true,
+                token: 'username',
+                refresh: 'somepassword',
+            },
         }
     }
 };

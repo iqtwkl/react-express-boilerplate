@@ -15,7 +15,7 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "start": "npx ts-node index.ts",
+    "start": "npx ts-node app/src/swagger.ts && npx ts-node index.ts",
     "build": "npx tsc"
   }
 }
