@@ -10,6 +10,8 @@
   "dependencies": {
     "@types/express": "^4.17.21",
     "express": "^4.19.2",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0",
     "typescript": "^5.4.5"
   },
   "scripts": {
