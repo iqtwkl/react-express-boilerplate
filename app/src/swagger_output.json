@@ -31,9 +31,19 @@
         }
       }
     },
-    "/auth/login": {
+    "/auth/login/{app_id}": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
