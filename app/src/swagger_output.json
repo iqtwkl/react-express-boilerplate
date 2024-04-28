@@ -31,9 +31,19 @@
         }
       }
     },
-    "/auth/login": {
+    "/auth/login/{app_id}": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -93,11 +103,11 @@
           },
           "token": {
             "type": "string",
-            "example": "username"
+            "example": "token"
           },
           "refresh": {
             "type": "string",
-            "example": "somepassword"
+            "example": "refresh-token"
           }
         }
       }

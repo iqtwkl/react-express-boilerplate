@@ -36,8 +36,8 @@ const doc = {
             },
             loginOutputSchema: {
                 status: true,
-                token: 'username',
-                refresh: 'somepassword',
+                token: 'token',
+                refresh: 'refresh-token',
             },
         }
     }

@@ -2,17 +2,6 @@ import express, {Request, Response} from 'express';
 
 export const authRoutes = express.Router();
 
-// interface LoginRequest extends Request {
-//     username: string;
-//     password: string;
-// }
-
-// interface LoginResponse extends Response {
-//     success: boolean;
-//     token: string;
-//     refresh: string;
-// }
-
 authRoutes.post('/auth/login/:app_id', (req: Request, res: Response): void => {
     /*  #swagger.requestBody = {
             required: true,
@@ -25,7 +14,6 @@ authRoutes.post('/auth/login/:app_id', (req: Request, res: Response): void => {
             }
         } 
     */
-    console.log(req.body.username);
     const { username, password } = req.body;
     const { app_id } = req.query;
 
