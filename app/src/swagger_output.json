@@ -103,11 +103,11 @@
           },
           "token": {
             "type": "string",
-            "example": "username"
+            "example": "token"
           },
           "refresh": {
             "type": "string",
-            "example": "somepassword"
+            "example": "refresh-token"
           }
         }
       }

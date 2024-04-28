@@ -25,7 +25,7 @@ apiRoutes.get('/', (req: Request, res: Response): void => {
 apiRoutes.use(authRoutes);
 
 apiRoutes.use(
-    "/api-docs",
+    "/docs",
     swaggerUi.serve,
     swaggerUi.setup(swaggerOutput)
 );
