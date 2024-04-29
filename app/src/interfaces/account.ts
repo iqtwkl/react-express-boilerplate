@@ -17,5 +17,5 @@ export interface AccountRepositoryInterface {
     update(id: string, user: AccountInterface): Promise<AccountInterface>;
     delete(id: string): Promise<AccountInterface>;
     findById(id: string): Promise<AccountInterface | null>;
-    findByEmail(email: string): Promise<AccountInterface | null>;
+    findByUsername(username: string): Promise<AccountInterface | null>;
 }
