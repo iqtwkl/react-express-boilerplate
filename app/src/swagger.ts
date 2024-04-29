@@ -39,6 +39,28 @@ const doc = {
                 token: 'token',
                 refresh: 'refresh-token',
             },
+            accountSchema: {
+                id: 'uuid-hash',
+                username: 'unique-username',
+                email: 'mail@email.com',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            accountInSchema: {
+                username: 'unique-username',
+                password: 'somepassword',
+                email: 'mail@email.com',
+            },
+            listAccountSchema: [
+                {
+                    id: 'uuid-hash',
+                    username: 'unique-username',
+                    password: 'somepassword',
+                    email: 'mail@email.com',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ]
         }
     }
 };

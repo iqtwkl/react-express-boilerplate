@@ -8,10 +8,9 @@ const env = process.env;
 
 export const dbDataSource = new DataSource({
   type: "sqlite",
-  database: `./data/datasource.sqlite`,
+  database: `./data/datasource.sqlite3`,
   entities: [ Account ],
   logging: true,
-  // migrations: [__dirname + "/migration/*.ts"],
   synchronize: true,
 });
 

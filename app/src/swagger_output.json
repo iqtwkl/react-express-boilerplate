@@ -67,6 +67,122 @@
           }
         }
       }
+    },
+    "/accounts/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listAccountSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountSchema"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/accountInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -108,6 +224,80 @@
           "refresh": {
             "type": "string",
             "example": "refresh-token"
+          }
+        }
+      },
+      "accountSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid-hash"
+          },
+          "username": {
+            "type": "string",
+            "example": "unique-username"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@email.com"
+          },
+          "create_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          },
+          "update_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          }
+        }
+      },
+      "accountInSchema": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "unique-username"
+          },
+          "password": {
+            "type": "string",
+            "example": "somepassword"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@email.com"
+          }
+        }
+      },
+      "listAccountSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "uuid-hash"
+            },
+            "username": {
+              "type": "string",
+              "example": "unique-username"
+            },
+            "password": {
+              "type": "string",
+              "example": "somepassword"
+            },
+            "email": {
+              "type": "string",
+              "example": "mail@email.com"
+            },
+            "create_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            },
+            "update_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            }
           }
         }
       }
