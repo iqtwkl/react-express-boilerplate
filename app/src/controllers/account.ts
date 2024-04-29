@@ -12,7 +12,9 @@ export class AccountController {
         } catch(error) {
             res.status(500).json({"error": error});
         }
-        /* #swagger.responses[200] = {
+        /* 
+        #swagger.tags = ['Account'] 
+        #swagger.responses[200] = {
             description: "",
             content: {
                 "application/json": {
@@ -36,6 +38,7 @@ export class AccountController {
                 }
             }
         } 
+        #swagger.tags = ['Account']
         */
         try {
             const accountService =  new AccountService()
@@ -69,6 +72,7 @@ export class AccountController {
                 }
             }
         } 
+        #swagger.tags = ['Account']
         */
         try {
             const accountService =  new AccountService()
@@ -91,6 +95,9 @@ export class AccountController {
     }
 
     static async delete(req: Request, res: Response) {
+        /*
+        #swagger.tags = ['Account']
+        */
         try {
           const accountService =  new AccountService()
           const account = await accountService.delete(req.params.id);
@@ -107,7 +114,9 @@ export class AccountController {
         } catch (error) {
           res.status(500).json({ error: error });
         }
-        /* #swagger.responses[200] = {
+        /* 
+        #swagger.tags = ['Account']
+        #swagger.responses[200] = {
             description: "",
             content: {
                 "application/json": {

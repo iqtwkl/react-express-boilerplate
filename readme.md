@@ -20,8 +20,10 @@ yarn install
 ### install backend
 
 ```
-// at root project
+# at root project
 yarn install
+cp env.example .env
+# change your environment variables
 ```
 
 ## How to run
@@ -36,7 +38,7 @@ yarn run start
 ### run backend
 
 ```
-// at root project
+# at root project
 yarn run start
 ```
 

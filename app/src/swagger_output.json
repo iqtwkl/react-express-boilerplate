@@ -31,19 +31,12 @@
         }
       }
     },
-    "/auth/login/{app_id}": {
+    "/auth/login/": {
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "app_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+        "tags": [
+          "Auth"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK",
@@ -54,6 +47,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "requestBody": {
@@ -70,6 +72,9 @@
     },
     "/accounts/": {
       "get": {
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -88,6 +93,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -121,6 +129,9 @@
     },
     "/accounts/{id}": {
       "get": {
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "parameters": [
           {
@@ -134,7 +145,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountSchema"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -142,6 +160,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "parameters": [
           {
@@ -155,14 +176,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountSchema"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/accountInSchema"
+              }
+            }
+          }
         }
       },
       "delete": {
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "parameters": [
           {
