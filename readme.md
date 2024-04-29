@@ -1,4 +1,12 @@
-# Boilerplate React (frontend), Express (Backend), Typeorm, Typescript
+# Masiflog Dashboarding 
+
+## Tech Stack
+
+- React (frontend)
+- Vite (frontend)
+- Express (Backend)
+- Typeorm
+- Typescript
 
 ## How to install
 
