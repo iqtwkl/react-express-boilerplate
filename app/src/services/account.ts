@@ -14,14 +14,14 @@ export class AccountService implements AccountRepositoryInterface {
         return accounts;
     }
     async create(account: AccountInterface): Promise<AccountInterface> {
-        const hashpass = await encrypt.encryptpass(account.password);
+        const hashPassword = await encrypt.encryptPassword(account.password);
 
         //new account object
         const newAccount = new Account();
         newAccount.id = uuidv4();
         newAccount.username = account.username;
         newAccount.email = account.email;
-        newAccount.password = hashpass;
+        newAccount.password = hashPassword;
 
         // create account process
         const accountRepository = dbDataSource.getRepository(Account);
@@ -67,11 +67,9 @@ export class AccountService implements AccountRepositoryInterface {
 
         return account;
     }
-    async findByEmail(email: string): Promise<AccountInterface | null> {
+    async findByUsername(username: string): Promise<AccountInterface | null> {
         const accountRepository = dbDataSource.getRepository(Account);
-        const account = await accountRepository.findOneBy({ email });
-
-        delete account.password;
+        const account = await accountRepository.findOneBy({ username });
         
         return account;
     }
