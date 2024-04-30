@@ -11,7 +11,7 @@ const FooterComponent = () => {
             href="/"
             src="/vite.svg"
             alt="Vite Logo"
-            name="RKG"
+            name="Boilerplate"
           />
           <Footer.LinkGroup>
             <Footer.Link href="#">About</Footer.Link>
