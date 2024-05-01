@@ -12,7 +12,14 @@ export interface AccountSessionInterface {
 }
 
 export interface AccountRepositoryInterface {
-    findAll(): Promise<AccountInterface[]>;
+    findAll(
+        page: number,
+        pageSize: number,
+        searchTerm: string,
+        searchBy: string[],
+        sort: string,
+        sortBy: string[]
+    ): Promise<AccountInterface[]>;
     create(user: AccountInterface): Promise<AccountInterface>;
     update(id: string, user: AccountInterface): Promise<AccountInterface>;
     delete(id: string): Promise<AccountInterface>;

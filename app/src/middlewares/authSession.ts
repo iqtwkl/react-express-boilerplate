@@ -1,12 +1,12 @@
 import { NextFunction, Response } from "express";
-import { customRequest } from "../interfaces/request";
+import { CustomRequest } from "../interfaces/request";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 const { JWT_SECRET = "" } = process.env;
 
 export class AuthMiddleware {
-  static async isAuthenticated(req: customRequest, res: Response, next: NextFunction) {
+  static async isAuthenticated(req: CustomRequest, res: Response, next: NextFunction) {
     try {
       // Check if the authorization header is valid
       if (!req.headers.authorization) {

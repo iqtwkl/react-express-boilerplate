@@ -3,13 +3,25 @@ import { Account } from "../models/Account";
 import { dbDataSource } from "../configs/db.config";
 import { encrypt } from "../utils/encriptor";
 import {v4 as uuidv4} from 'uuid';
+import { dbUtils } from '../utils/db'
 
 export class AccountService implements AccountRepositoryInterface {
-    async findAll(): Promise<AccountInterface[]> {
+    async findAll(
+        page: number = 1,
+        amount: number = 10,
+        search: string = '',
+        search_by: string[] = ['username', 'email'],
+        sort: string = 'ASC',
+        sort_by: string[] = ['created_at']
+    ): Promise<AccountInterface[]> {
         const accountRepository = dbDataSource.getRepository(Account);
-        const accounts = await accountRepository.find();
-        
-        accounts.forEach(function(v){ delete v.password });
+
+        const accounts = await accountRepository.find({
+            skip: dbUtils.skipPage(page, amount),
+            take: amount,
+            where: dbUtils.whereConditions(search_by, search),
+            order: dbUtils.orderConditions(sort_by, sort),
+        });
 
         return accounts;
     }
@@ -28,8 +40,6 @@ export class AccountService implements AccountRepositoryInterface {
         
         await accountRepository.save(newAccount);
 
-        delete newAccount.password;
-
         return newAccount;
     }
     async update(id: string, user: AccountInterface): Promise<AccountInterface> {
@@ -43,8 +53,6 @@ export class AccountService implements AccountRepositoryInterface {
         accountToUpdate.password = user.password;
         await accountRepository.save(accountToUpdate);
 
-        delete accountToUpdate.password;
-
         return accountToUpdate;
     }
     async delete(id: string): Promise<AccountInterface> {
@@ -55,15 +63,11 @@ export class AccountService implements AccountRepositoryInterface {
         }
         await accountRepository.delete(accountToDelete);
 
-        delete accountToDelete.password;
-
         return accountToDelete;
     }
     async findById(id: string): Promise<AccountInterface | null> {
         const accountRepository = dbDataSource.getRepository(Account);
         const account = await accountRepository.findOneBy({ id })
-
-        delete account.password;
 
         return account;
     }
