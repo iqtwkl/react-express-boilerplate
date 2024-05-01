@@ -1,4 +1,15 @@
 import { Request } from "express";
-export interface customRequest extends Request {
+
+
+export interface CustomRequest extends Request {
   currentUser?: any;
+}
+
+export interface PaginationSortingSearchParameter {
+  page: number,
+  amount: number,
+  search: string,
+  search_by: string[],
+  sort: string,
+  sort_by: string[]
 }

@@ -1,32 +1,17 @@
-import reactLogo from '../assets/react.svg'
-import { useState } from 'react'
+// import '../App.css';
+import RootLayout from '../components/layouts/layout';
 
 export function IndexPage() {
-    const [count, setCount] = useState(0)
+  const breadcrumbList = [
+    { href: '', name: 'Dashboard' },
+  ];
 
-    return (
-      <>
+  return (
+    <RootLayout breadcrumbList={breadcrumbList} title='Dashboard'>
+        <h1>Dashboard</h1>
         <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src="" className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+            <p>chart</p>
         </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/pages/index.tsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </>
-    )
+    </RootLayout>
+  ) 
   }
-  
