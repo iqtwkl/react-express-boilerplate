@@ -1,7 +1,8 @@
 import express, {Express, Request, Response} from "express";
 import path from 'path';
 import { apiRoutes } from './src/routes/api';
-import { dbDataSource } from './src/configs/db.config'
+import { dbDataSource } from './src/configs/db.config';
+import cors from 'cors';
 
 export class Server {
 
@@ -12,14 +13,14 @@ export class Server {
     
         this.app.use(express.static(path.resolve("./") + "/build/frontend"));
     
-        this.app.use("/api", apiRoutes);
+        this.app.use("/api", cors(), apiRoutes);
     
         this.app.get("*", (req: Request, res: Response): void => {
             res.sendFile(path.resolve("./") + "/build/frontend/index.html");
         });
     }
 
-    public start(port: number): void {        
+    public start(port: number): void {     
         dbDataSource.initialize()
             .then(() => {
                 console.log("Database connected");
