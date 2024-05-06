@@ -1,8 +1,8 @@
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { IndexPage } from './pages';
 import { LoginPage } from './pages/login';
-import { AuthProvider, useAuth } from './hooks/AuthContext';
+import { AuthProvider } from './hooks/AuthContext';
 
 function App() {
   return (
