@@ -20,8 +20,8 @@ export interface AccountRepositoryInterface {
         sort: string,
         sortBy: string[]
     ): Promise<AccountInterface[]>;
-    create(user: AccountInterface): Promise<AccountInterface>;
-    update(id: string, user: AccountInterface): Promise<AccountInterface>;
+    create(account: AccountInterface): Promise<AccountInterface>;
+    update(id: string, account: AccountInterface): Promise<AccountInterface>;
     delete(id: string): Promise<AccountInterface>;
     findById(id: string): Promise<AccountInterface | null>;
     findByUsername(username: string): Promise<AccountInterface | null>;
