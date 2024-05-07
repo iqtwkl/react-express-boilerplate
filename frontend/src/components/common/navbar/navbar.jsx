@@ -2,8 +2,15 @@
 'use client';
 
 import { Avatar, Dropdown, Navbar, DarkThemeToggle, TextInput, Label } from 'flowbite-react';
+import { useAuth } from '../../../hooks/AuthContext';
 
 const NavbarComponent = () => {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <Navbar className='z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 justify-between rounded-lg shadow-sm'>
       <form action="#" method="GET" className="hidden lg:block lg:pl-3.5">
@@ -31,7 +38,7 @@ const NavbarComponent = () => {
           <Dropdown.Item href='/'>Dashboard</Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
     </Navbar>

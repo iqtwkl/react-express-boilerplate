@@ -42,15 +42,15 @@ export class AccountService implements AccountRepositoryInterface {
 
         return newAccount;
     }
-    async update(id: string, user: AccountInterface): Promise<AccountInterface> {
+    async update(id: string, account: AccountInterface): Promise<AccountInterface> {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToUpdate = await accountRepository.findOneBy({ id });
         if (!accountToUpdate) {
             throw new Error("User not found");
         }
-        accountToUpdate.username = user.username;
-        accountToUpdate.email = user.email;
-        accountToUpdate.password = user.password;
+        accountToUpdate.username = account.username;
+        accountToUpdate.email = account.email;
+        accountToUpdate.password = account.password;
         await accountRepository.save(accountToUpdate);
 
         return accountToUpdate;
