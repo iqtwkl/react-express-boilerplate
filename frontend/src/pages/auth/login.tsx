@@ -4,10 +4,14 @@ import FooterComponent from '../../components/common/footer/footer';
 import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
+import ErrorModalComponent from "../../components/common/error";
 
 export function LoginPage() {
     const navigate = useNavigate();
     const { isLoggedIn, setLoggedIn, token, setToken } = useAuth(); 
+    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState('');
+
     const [data, setData] = useState({
         username: '',
         password: ''
@@ -26,14 +30,17 @@ export function LoginPage() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
-        const api = new AuthAPI();
-        const response = await api.login(data.username, data.password);
-        if (response.success && response.token) {
+        try {
+            const api = new AuthAPI();
+            const response = await api.login(data.username, data.password);
             setToken(response.token);
             setLoggedIn(response.success);
-        } else {
-            throw Error(response.error);
+        } catch(error: Error | any) {
+            setError(error.response.data.error);
+            setIsError(true);
         }
+        
+         
     };
 
     useEffect(() => {
@@ -163,6 +170,7 @@ export function LoginPage() {
                     </div>
                     </div>
                 </div>
+                <ErrorModalComponent error={error} isError={isError} setIsError={setIsError} />
             </section>
             <FooterComponent />
         </>
