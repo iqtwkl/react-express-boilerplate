@@ -38,9 +38,7 @@ export function LoginPage() {
         } catch(error: Error | any) {
             setError(error.response.data.error);
             setIsError(true);
-        }
-        
-         
+        }       
     };
 
     useEffect(() => {
