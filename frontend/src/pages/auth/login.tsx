@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import FooterComponent from '../components/common/footer/footer';
-import { AuthAPI } from '../services/api/auth';
+import FooterComponent from '../../components/common/footer/footer';
+import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 export function LoginPage() {
     const navigate = useNavigate();

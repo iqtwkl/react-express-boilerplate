@@ -17,8 +17,8 @@ const SidebarComponent = () => {
                         Dashboard
                     </Sidebar.Item>
                     <Sidebar.Collapse icon={HiUser} label="Accounts">
-                        <Sidebar.Item href="/accounts/account">Accounts</Sidebar.Item>
-                        <Sidebar.Item href="/accounts/role">Role</Sidebar.Item>
+                        <Sidebar.Item href="/account">Accounts</Sidebar.Item>
+                        <Sidebar.Item href="/role">Role</Sidebar.Item>
                     </Sidebar.Collapse>
                 </Sidebar.ItemGroup>
             </Sidebar.Items>
