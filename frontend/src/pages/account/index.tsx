@@ -4,16 +4,16 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { useEffect, useState } from 'react';
 import LoadingComponent from '../../components/common/loading';
 import TableComponent from '../../components/common/table';
-import ErrorModalComponent from '../../components/common/error';
+import ErrorModalComponent, { ApplicationError } from '../../components/common/error';
 import { AccountAPI } from '../../services/api/account';
 import { useAuth } from '../../hooks/AuthContext';
 import { AccountInterface } from '../../components/entity/account';
 
 export function AccountIndexPage() {
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState<ApplicationError>(Object);
     const [loading, setLoading] = useState(true);
-    const [accounts, setAccounts] = useState([]);
+    const [accounts, setAccounts] = useState<AccountInterface[]>([]);
     const { token } = useAuth();
 
     const breadcrumbList = [
@@ -47,8 +47,8 @@ export function AccountIndexPage() {
             const api = new AccountAPI(token);
             const response = await api.getAll(1,10,search,search_by);
             setAccounts(response);
-        } catch (error) {
-            setError(error.response.data.error);
+        } catch (error: any) {
+            setError(error);
             setIsError(true);
         } finally {
             setLoading(false);

@@ -3,8 +3,6 @@ import { LoginResponseInterface } from "../../components/entity/loginResponse";
 
 const env = import.meta.env;
 
-console.log(env);
-
 export class AuthAPI {
     URL:string = `${env.VITE_API_URL}/auth`;
 
