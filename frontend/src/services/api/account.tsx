@@ -37,14 +37,14 @@ export class AccountAPI extends AuthorizedAPIRequest{
         return response.data;
     }
 
-    async getById(id:number): Promise<AccountInterface> {
+    async getById(id: string): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
 
         const response = await this.makeRequest(url, 'get');
         return response.data;
     }
 
-    async delete(id:number): Promise<AccountInterface> {
+    async delete(id: string): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
         
         const response = await this.makeRequest(url, 'delete');
@@ -58,10 +58,10 @@ export class AccountAPI extends AuthorizedAPIRequest{
         return response.data;
     }
 
-    async update(id: number, account: AccountInterface): Promise<AccountInterface> {
+    async update(id: string, account: AccountInterface): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
 
-        const response = await this.makeRequest(url, 'post', account);
+        const response = await this.makeRequest(url, 'put', account);
         return response.data;
     }
     

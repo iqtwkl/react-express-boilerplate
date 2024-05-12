@@ -6,8 +6,9 @@ import BreadcrumbComponent from '../common/breadcrumb';
 import PageTitleComponent from '../common/pageTitle';
 import { useAuth } from '../../hooks/AuthContext';
 import { Navigate } from 'react-router-dom';
+import ErrorModalComponent from '../common/error';
 
-export default function RootLayout({children, breadcrumbList, title }) {
+export default function RootLayout({children, breadcrumbList, title, error, isError, setIsError }) {
     const { isLoggedIn, token } = useAuth();
 
     if (!isLoggedIn && !token) {
@@ -35,6 +36,7 @@ export default function RootLayout({children, breadcrumbList, title }) {
                     </main>
                 </div>
             </div>
+            <ErrorModalComponent error={error} isError={isError} setIsError={setIsError} />
         </Flowbite>
     );
 }

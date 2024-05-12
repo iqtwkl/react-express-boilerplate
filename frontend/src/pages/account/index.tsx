@@ -3,11 +3,12 @@ import { Button } from "flowbite-react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { useEffect, useState } from 'react';
 import LoadingComponent from '../../components/common/loading';
-import TableComponent from '../../components/common/table';
-import ErrorModalComponent, { ApplicationError } from '../../components/common/error';
+import { ApplicationError } from '../../components/common/error';
 import { AccountAPI } from '../../services/api/account';
 import { useAuth } from '../../hooks/AuthContext';
 import { AccountInterface } from '../../components/entity/account';
+import { CreateModal, EditModal } from './modal';
+import CrudTableComponent from '../../components/common/table/crud';
 
 export function AccountIndexPage() {
     const [isError, setIsError] = useState(false);
@@ -15,6 +16,12 @@ export function AccountIndexPage() {
     const [loading, setLoading] = useState(true);
     const [accounts, setAccounts] = useState<AccountInterface[]>([]);
     const { token } = useAuth();
+    const [ isCreate, setIsCreate ] = useState(false);
+    const [ isEdit, setIsEdit ] = useState(false);
+    const [ isDelete, setIsDelete ] = useState(false);
+    const [ isSuccess, setIsSuccess ] = useState(false);
+    const [ account, setAccount ] = useState<AccountInterface | undefined>(undefined);
+    const api = new AccountAPI(token);
 
     const breadcrumbList = [
         { href: '', name: 'Account' },
@@ -22,7 +29,7 @@ export function AccountIndexPage() {
 
     const crudAction = (account: AccountInterface) => {
         return (
-            <div className='flex'>
+            <div className='flex justify-end'>
                 <Button pill outline className="mr-2" onClick={() => handleEdit(account)}>
                   <AiFillEdit className="h-4 w-4" />
                 </Button>
@@ -34,17 +41,72 @@ export function AccountIndexPage() {
     };
 
     const handleDelete = (account: AccountInterface) => {
-        console.log(account);
+        setAccount(account);
+        setIsDelete(true);
     }
 
     const handleEdit = (account: AccountInterface) => {
-        console.log(account);
+        setAccount(account);
+        setIsEdit(true);
+    }
+
+    const handleEdited = async () => {
+        try {
+            if (account) {
+                const response = await api.update(account.id, account);
+                setAccount(response);
+                setIsSuccess(true);
+                getDataAccount();
+            } else {
+                throw new ApplicationError(500, 'No Account Selected');
+            }
+        } catch (error: any) {
+            setError(error);
+            setIsError(true);
+        } finally {
+            setAccount(undefined); 
+        }
+    }
+
+    const handleDeleted = async () => {
+        try {
+            if (account) {
+                const response = await api.delete(account.id);
+                setAccount(response);
+                setIsSuccess(true);
+                getDataAccount();
+            } else {
+                throw new ApplicationError(500, 'No Account Selected');
+            }
+        } catch (error: any) {
+            setError(error);
+            setIsError(true);
+        } finally {
+            setAccount(undefined);
+        }
+    }
+
+    const handleCreated = async () => {
+        try {
+            if (account) {
+                const response = await api.create(account);
+                setAccount(response);
+                setIsSuccess(true);
+                getDataAccount();
+            } else {
+                throw new ApplicationError(500, 'No Account Set');
+            }
+        } catch (error: any) {
+            setError(error);
+            setIsError(true);
+        } finally {
+            setAccount(undefined);
+        }
     }
 
     const getDataAccount = async (search='', search_by='') => {
         setLoading(true);
         try {
-            const api = new AccountAPI(token);
             const response = await api.getAll(1,10,search,search_by);
             setAccounts(response);
         } catch (error: any) {
@@ -59,19 +121,24 @@ export function AccountIndexPage() {
         getDataAccount();
     }, []);
 
+    useEffect(() => {
+        console.log(account);
+    }, [account]);
+
     const columnConfig = [
         { header: 'User Name', accessor: 'username' },
         { header: 'Email', accessor: 'email' },
-        { header: 'Actions', body: crudAction, asIs: true } 
+        { header: '', body: crudAction, asIs: true } 
     ];
 
     return (
         <>
-            <RootLayout breadcrumbList={breadcrumbList} title='Account'>
+            <RootLayout breadcrumbList={breadcrumbList} title='Account' error={error} isError={isError} setIsError={setIsError}>
                 {
-                    loading ? <LoadingComponent/> : <TableComponent columnConfig={columnConfig} data={accounts} />
+                    loading ? <LoadingComponent/> : <CrudTableComponent columnConfig={columnConfig} data={accounts} setIsCreate={setIsCreate} />
                 }
-                <ErrorModalComponent error={error} isError={isError} setIsError={setIsError} />
+                <CreateModal isOpen={isCreate} setIsOpen={setIsCreate} handleSave={handleCreated} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
+                <EditModal isOpen={isEdit} setIsOpen={setIsEdit} account={account} handleSave={handleEdited} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
             </RootLayout>
         </>
     )
