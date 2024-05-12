@@ -1,4 +1,4 @@
-import { Button, Modal, Toast } from "flowbite-react";
+import { Button, Label, Modal, TextInput, Toast } from "flowbite-react";
 import { AccountInterface } from "../../components/entity/account";
 import { HiCheck } from "react-icons/hi";
 
@@ -7,7 +7,7 @@ interface ModalProps {
     setIsOpen: (isOpen: boolean) => void,  
     handleSave: () => void,
     account?: AccountInterface,
-    setAccount: (account: AccountInterface | undefined) => void,
+    setAccount: (account: AccountInterface | any) => void,
     isSuccess: boolean,
     setIsSuccess: (isSuccess: boolean) => void,
 }
@@ -63,6 +63,15 @@ export const EditModal = (props: ModalProps) => {
         setAccount(undefined);
     }
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        const editedAccount = (prevState: AccountInterface) => ({
+            ...prevState,
+            [name]: value
+        })
+        setAccount(editedAccount);
+    };
+
     return (
         <>
             <Modal show={isOpen} onClose={handleClose}>
@@ -79,7 +88,34 @@ export const EditModal = (props: ModalProps) => {
                             <Toast.Toggle />
                         </Toast>
                     )}
-                    
+                    <div className="grid gap-4 mb-4 sm:grid-cols-1">
+                        <div>
+                            <Label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</Label>
+                            <TextInput 
+                                name="username" 
+                                className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Username" value={account?.username} onChange={(e) => handleChange(e)}
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</Label>
+                            <TextInput 
+                                type="email"
+                                name="email" 
+                                className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Password" value={account?.email} onChange={(e) => handleChange(e)}
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</Label>
+                            <TextInput 
+                                type="password"
+                                name="password" 
+                                className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Password" value={account?.password} onChange={(e) => handleChange(e)}
+                            />
+                        </div>
+                    </div>
                     <div className="flex justify-end gap-4">
                         <Button
                         color="warning" onClick={handleSave}>

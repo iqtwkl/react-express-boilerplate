@@ -63,6 +63,7 @@ export function AccountIndexPage() {
         } catch (error: any) {
             setError(error);
             setIsError(true);
+            setIsEdit(false);
         } finally {
             setAccount(undefined); 
         }
@@ -81,6 +82,7 @@ export function AccountIndexPage() {
         } catch (error: any) {
             setError(error);
             setIsError(true);
+            setIsDelete(false);
         } finally {
             setAccount(undefined);
         }
@@ -99,6 +101,7 @@ export function AccountIndexPage() {
         } catch (error: any) {
             setError(error);
             setIsError(true);
+            setIsCreate(false);
         } finally {
             setAccount(undefined);
         }
