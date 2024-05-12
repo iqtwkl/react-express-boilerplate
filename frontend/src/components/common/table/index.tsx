@@ -7,7 +7,7 @@ interface IMapper {
   body: (obj: any) => void,
 }
 
-interface ITableProps {
+export interface ITableProps {
     columnConfig: IMapper[],
     data: any[],
 }

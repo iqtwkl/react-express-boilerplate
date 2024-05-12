@@ -1,15 +1,33 @@
 import { Button, Modal } from 'flowbite-react';
-import { useEffect } from 'react';
 import { HiOutlineExclamationCircle } from "react-icons/hi"
+import { useAuth } from '../../hooks/AuthContext';
+
+export class ApplicationError extends Error {
+  status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = this.constructor.name;
+    this.status = status;
+  }
+}
 
 interface ErrorProps {
-  error: string,
+  error: ApplicationError,
   isError: boolean,
   setIsError: (isError: boolean) => void,  
 }
 
 export default function ErrorModalComponent(props: ErrorProps) {
   const { error, isError, setIsError } = props;
+  const { logout } = useAuth();
+
+  const handleButtonClick = () => {
+    setIsError(false);
+    if (error.status == 401) {
+      logout();
+    }
+  }
 
   return (
     <>
@@ -18,12 +36,12 @@ export default function ErrorModalComponent(props: ErrorProps) {
         <Modal.Body>
           <div className="text-center">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            <h3 className="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">
               Something went wrong! Please try again.
             </h3>
-            <p>error: <span>{error}</span></p>
+            <p className='mb-5'>{error.message}</p>
             <div className="flex justify-center gap-4">
-              <Button color="gray" onClick={() => setIsError(false)}>
+              <Button color="gray" onClick={handleButtonClick}>
                 Ok
               </Button>
             </div>

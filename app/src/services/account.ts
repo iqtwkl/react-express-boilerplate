@@ -61,7 +61,7 @@ export class AccountService implements AccountRepositoryInterface {
         if (!accountToDelete) {
             throw new Error("User not found");
         }
-        await accountRepository.delete(accountToDelete);
+        await accountRepository.delete(accountToDelete.id);
 
         return accountToDelete;
     }
