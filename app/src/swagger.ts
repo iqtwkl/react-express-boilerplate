@@ -60,6 +60,14 @@ const doc = {
                     create_at: 'yyyy-mm-dd',
                     update_at: 'yyyy-mm-dd',
                 }
+            ],
+            listGroupSchema: [
+                {
+                    id: 'uuid-hash',
+                    name: 'unique-name',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
             ]
         }
     }

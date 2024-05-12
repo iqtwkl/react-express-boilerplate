@@ -20,11 +20,11 @@ export class Group {
     @Column({unique: true})
     name: string;
 
-    @ManyToMany(() => Dashboard)
+    @ManyToMany(() => Dashboard, (dashboard) => dashboard.groups)
     @JoinTable()
     dashboards: Dashboard[]
   
-    @ManyToMany(() => Account)
+    @ManyToMany(() => Account, (account) => account.groups)
     @JoinTable()
     accounts: Account[]
 

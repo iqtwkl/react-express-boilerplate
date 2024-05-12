@@ -1,9 +1,10 @@
 import express, {Request, Response} from 'express';
 import { authRoutes } from './auth';
-import { accountRoutes } from './account'
+import { accountRoutes } from './account';
+import { groupRoutes } from './group';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOutput from "../../swagger_output.json";
-import * as bodyParser from 'body-parser'
+import * as bodyParser from 'body-parser';
 
 export const apiRoutes = express.Router();
 
@@ -25,6 +26,7 @@ apiRoutes.get('/', (req: Request, res: Response): void => {
 
 apiRoutes.use(authRoutes);
 apiRoutes.use(accountRoutes);
+apiRoutes.use(groupRoutes);
 
 apiRoutes.use(
     "/docs",

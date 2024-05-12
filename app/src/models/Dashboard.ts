@@ -5,9 +5,11 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
+    ManyToMany,
 } from "typeorm";
 
 import { KibanaConnection } from "./KibanaConnection";
+import { Group } from "./Group";
   
 @Entity()
 export class Dashboard {
@@ -19,6 +21,9 @@ export class Dashboard {
   
     @ManyToOne(() => KibanaConnection, (kibana) => kibana.dashboards)
     kibana: KibanaConnection;
+
+    @ManyToMany(() => Group, (group) => group.dashboards)
+    groups: Group[];
   
     @CreateDateColumn()
     created_at: Date;

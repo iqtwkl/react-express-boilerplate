@@ -4,7 +4,7 @@
   "description": "boilerplate for react and express app",
   "main": "index.js",
   "repository": "https://github.com/iqtwkl/react-express-boilerplate",
-  "author": "Iqbal Tawakal <iqtwkl@gmail.com>",
+  "author": "Iqbal Tawakal <iqtwkl@gmail.com>, Evander Tokang <tokang.evander@gmail.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {
