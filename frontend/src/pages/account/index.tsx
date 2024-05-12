@@ -7,7 +7,7 @@ import { ApplicationError } from '../../components/common/error';
 import { AccountAPI } from '../../services/api/account';
 import { useAuth } from '../../hooks/AuthContext';
 import { AccountInterface } from '../../components/entity/account';
-import { CreateModal, EditModal } from './modal';
+import { CreateModal, DeleteModal, EditModal } from './modal';
 import CrudTableComponent from '../../components/common/table/crud';
 
 export function AccountIndexPage() {
@@ -65,7 +65,11 @@ export function AccountIndexPage() {
             setIsError(true);
             setIsEdit(false);
         } finally {
-            setAccount(undefined); 
+            setAccount(undefined);
+            setTimeout(() => {
+                setIsSuccess(false);
+                setIsEdit(false);
+            }, 1234);
         }
     }
 
@@ -85,6 +89,10 @@ export function AccountIndexPage() {
             setIsDelete(false);
         } finally {
             setAccount(undefined);
+            setTimeout(() => {
+                setIsSuccess(false);
+                setIsDelete(false);
+            }, 1234);
         }
     }
 
@@ -104,6 +112,10 @@ export function AccountIndexPage() {
             setIsCreate(false);
         } finally {
             setAccount(undefined);
+            setTimeout(() => {
+                setIsSuccess(false);
+                setIsCreate(false);
+            }, 1234);
         }
     }
 
@@ -142,6 +154,7 @@ export function AccountIndexPage() {
                 }
                 <CreateModal isOpen={isCreate} setIsOpen={setIsCreate} handleSave={handleCreated} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
                 <EditModal isOpen={isEdit} setIsOpen={setIsEdit} account={account} handleSave={handleEdited} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
+                <DeleteModal isOpen={isDelete} setIsOpen={setIsDelete} account={account} handleSave={handleDeleted} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount} />
             </RootLayout>
         </>
     )
