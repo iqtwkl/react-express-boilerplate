@@ -10,9 +10,9 @@ groupRoutes.put('/group/:id', AuthMiddleware.isAuthenticated, GroupController.up
 groupRoutes.get('/group/:id', AuthMiddleware.isAuthenticated, GroupController.findById);
 groupRoutes.get('/group/name/:name', AuthMiddleware.isAuthenticated, GroupController.findByName);
 groupRoutes.post('/group/account', AuthMiddleware.isAuthenticated, GroupController.addAccount);
-groupRoutes.get('/group/accounts/:id', AuthMiddleware.isAuthenticated, GroupController.listAccount);
+groupRoutes.get('/group/:id/accounts', AuthMiddleware.isAuthenticated, GroupController.listAccount);
 groupRoutes.post('/group/dashboard', AuthMiddleware.isAuthenticated, GroupController.addDashboard);
-groupRoutes.get('/group/dashboards/:id', AuthMiddleware.isAuthenticated, GroupController.listDashboard);
+groupRoutes.get('/group/:id/dashboards', AuthMiddleware.isAuthenticated, GroupController.listDashboard);
 groupRoutes.delete('/group/account', AuthMiddleware.isAuthenticated, GroupController.deleteAccount);
 groupRoutes.delete('/group/dashboard', AuthMiddleware.isAuthenticated, GroupController.deleteDashboard);
 groupRoutes.delete('/group/:id', AuthMiddleware.isAuthenticated, GroupController.delete);

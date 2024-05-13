@@ -770,7 +770,7 @@
         }
       }
     },
-    "/group/accounts/{id}": {
+    "/group/{id}/accounts": {
       "get": {
         "tags": [
           "Group"
@@ -916,7 +916,7 @@
         }
       }
     },
-    "/group/dashboards/{id}": {
+    "/group/{id}/dashboards": {
       "get": {
         "tags": [
           "Group"
