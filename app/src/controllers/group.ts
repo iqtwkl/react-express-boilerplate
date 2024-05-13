@@ -225,9 +225,9 @@ export class GroupController {
         } 
         */
        try {
-          const { accountId, groupId } = req.body;
+          const { accountId } = req.body;
           const groupService = new GroupService();
-          const accountsInGroup = await groupService.addAccount(accountId, groupId);
+          const accountsInGroup = await groupService.addAccount(accountId, req.params.id);
 
           res.status(200).json(accountsInGroup);
        } catch (error) {
@@ -263,9 +263,9 @@ export class GroupController {
         } 
         */
        try {
-          const { accountId, groupId } = req.body;
+          const { accountId } = req.body;
           const groupService = new GroupService();
-          const accountsInGroup = await groupService.deleteAccount(accountId, groupId);
+          const accountsInGroup = await groupService.deleteAccount(accountId, req.params.id);
 
           res.status(200).json(accountsInGroup);
        } catch (error) {
@@ -327,9 +327,9 @@ export class GroupController {
         } 
         */
        try {
-          const { accountId, groupId } = req.body;
+          const { dashboardId } = req.body;
           const groupService = new GroupService();
-          const dashboardsInGroup = await groupService.addDashboard(accountId, groupId);
+          const dashboardsInGroup = await groupService.addDashboard(dashboardId, req.params.id);
 
           res.status(200).json(dashboardsInGroup);
        } catch (error) {
@@ -365,9 +365,9 @@ export class GroupController {
         } 
         */
        try {
-          const { accountId, groupId } = req.body;
+          const { dashboardId } = req.body;
           const groupService = new GroupService();
-          const dashboardsInGroup = await groupService.deleteDashboard(accountId, groupId);
+          const dashboardsInGroup = await groupService.deleteDashboard(dashboardId, req.params.id);
 
           res.status(200).json(dashboardsInGroup);
        } catch (error) {

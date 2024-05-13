@@ -9,10 +9,10 @@ groupRoutes.post('/group', AuthMiddleware.isAuthenticated, GroupController.creat
 groupRoutes.put('/group/:id', AuthMiddleware.isAuthenticated, GroupController.update);
 groupRoutes.get('/group/:id', AuthMiddleware.isAuthenticated, GroupController.findById);
 groupRoutes.get('/group/name/:name', AuthMiddleware.isAuthenticated, GroupController.findByName);
-groupRoutes.post('/group/account', AuthMiddleware.isAuthenticated, GroupController.addAccount);
+groupRoutes.post('/group/:id/account', AuthMiddleware.isAuthenticated, GroupController.addAccount);
 groupRoutes.get('/group/:id/accounts', AuthMiddleware.isAuthenticated, GroupController.listAccount);
-groupRoutes.post('/group/dashboard', AuthMiddleware.isAuthenticated, GroupController.addDashboard);
+groupRoutes.post('/group/:id/dashboard', AuthMiddleware.isAuthenticated, GroupController.addDashboard);
 groupRoutes.get('/group/:id/dashboards', AuthMiddleware.isAuthenticated, GroupController.listDashboard);
-groupRoutes.delete('/group/account', AuthMiddleware.isAuthenticated, GroupController.deleteAccount);
-groupRoutes.delete('/group/dashboard', AuthMiddleware.isAuthenticated, GroupController.deleteDashboard);
+groupRoutes.delete('/group/:id/account', AuthMiddleware.isAuthenticated, GroupController.deleteAccount);
+groupRoutes.delete('/group/:id/dashboard', AuthMiddleware.isAuthenticated, GroupController.deleteDashboard);
 groupRoutes.delete('/group/:id', AuthMiddleware.isAuthenticated, GroupController.delete);

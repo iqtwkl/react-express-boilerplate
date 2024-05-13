@@ -87,7 +87,6 @@ const doc = {
             },
             groupAccountsInSchema: {
                 accountId: 'uuid-hash',
-                groupId: 'uuid-hash',
             },
             groupDashboardsSchema: {
                 id: 'uuid-hash',
@@ -106,7 +105,6 @@ const doc = {
             },
             groupDashboardsInSchema: {
                 dashboardId: 'uuid-hash',
-                groupId: 'uuid-hash',
             },
             listGroupSchema: [
                 {

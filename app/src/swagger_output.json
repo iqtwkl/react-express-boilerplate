@@ -672,13 +672,21 @@
         ]
       }
     },
-    "/group/account": {
+    "/group/{id}/account": {
       "post": {
         "tags": [
           "Group"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -727,6 +735,14 @@
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -818,13 +834,21 @@
         ]
       }
     },
-    "/group/dashboard": {
+    "/group/{id}/dashboard": {
       "post": {
         "tags": [
           "Group"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -873,6 +897,14 @@
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -1166,10 +1198,6 @@
           "accountId": {
             "type": "string",
             "example": "uuid-hash"
-          },
-          "groupId": {
-            "type": "string",
-            "example": "uuid-hash"
           }
         }
       },
@@ -1226,10 +1254,6 @@
         "type": "object",
         "properties": {
           "dashboardId": {
-            "type": "string",
-            "example": "uuid-hash"
-          },
-          "groupId": {
             "type": "string",
             "example": "uuid-hash"
           }
