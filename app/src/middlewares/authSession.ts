@@ -30,4 +30,11 @@ export class AuthMiddleware {
       return res.status(401).json({ error: "Invalid token" });
     }
   }
+  static async isAdmin(req: CustomRequest, res: Response, next: NextFunction) {
+    if (req.currentUser && req.currentUser.isAdmin) {
+      next();
+    } else {
+      return res.status(401).json({ error: "Access denied" });
+    }
+  }
 }
