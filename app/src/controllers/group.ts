@@ -71,4 +71,349 @@ export class GroupController {
         }   
         */
     }
+    static async create(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupInSchema"
+                    }  
+                }
+            }
+        } 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.tags = ['Group']
+        */
+        try {
+            const groupService =  new GroupService()
+            const group = await groupService.create(req.body);
+
+            res.status(201).json(group);
+        } catch(error) {
+            console.log(`Debug: catch error = ${error}`)
+            res.status(500).json({"error": error.message});
+        }
+        /* #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async update(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupInSchema"
+                    }  
+                }
+            }
+        } 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.tags = ['Group']
+        */
+        try {
+            const groupService =  new GroupService()
+            const group = await groupService.update(req.params.id, req.body);
+
+            res.status(200).json(group);
+        } catch (error) {
+            res.status(500).json({ "error": error.message });
+        }
+        /* #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async delete(req: Request, res: Response) {
+        /*
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        */
+        try {
+          const groupService =  new GroupService()
+          const group = await groupService.delete(req.params.id);
+
+          res.status(200).json(group);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+    }
+    static async findById(req: Request, res: Response) {
+        try {
+          const groupService =  new GroupService()
+          const group = await groupService.findById(req.params.id);
+
+          res.status(200).json(group);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async findByName(req: Request, res: Response) {
+        try {
+          const groupService =  new GroupService();
+          const group = await groupService.findByName(req.params.name);
+
+          res.status(200).json(group);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async addAccount(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupAccountsInSchema"
+                    }  
+                }
+            }
+        } 
+        */
+       try {
+          const { accountId, groupId } = req.body;
+          const groupService = new GroupService();
+          const accountsInGroup = await groupService.addAccount(accountId, groupId);
+
+          res.status(200).json(accountsInGroup);
+       } catch (error) {
+          res.status(500).json({ "error": error.message });
+       }
+       /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupAccountsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async deleteAccount(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupAccountsInSchema"
+                    }  
+                }
+            }
+        } 
+        */
+       try {
+          const { accountId, groupId } = req.body;
+          const groupService = new GroupService();
+          const accountsInGroup = await groupService.deleteAccount(accountId, groupId);
+
+          res.status(200).json(accountsInGroup);
+       } catch (error) {
+          res.status(500).json({ "error": error.message });
+       }
+       /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupAccountsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async listAccount(req: Request, res: Response) {
+        try {
+          const groupService =  new GroupService();
+          const group = await groupService.listAccount(req.params.id);
+
+          res.status(200).json(group);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupDashboardsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async addDashboard(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupDashboardsInSchema"
+                    }  
+                }
+            }
+        } 
+        */
+       try {
+          const { accountId, groupId } = req.body;
+          const groupService = new GroupService();
+          const dashboardsInGroup = await groupService.addDashboard(accountId, groupId);
+
+          res.status(200).json(dashboardsInGroup);
+       } catch (error) {
+          res.status(500).json({ "error": error.message });
+       }
+       /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupDashboardsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async deleteDashboard(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/groupDashboardsInSchema"
+                    }  
+                }
+            }
+        } 
+        */
+       try {
+          const { accountId, groupId } = req.body;
+          const groupService = new GroupService();
+          const dashboardsInGroup = await groupService.deleteDashboard(accountId, groupId);
+
+          res.status(200).json(dashboardsInGroup);
+       } catch (error) {
+          res.status(500).json({ "error": error.message });
+       }
+       /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupDashboardsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async listDashboard(req: Request, res: Response) {
+        try {
+          const groupService =  new GroupService();
+          const group = await groupService.listDashboard(req.params.id);
+
+          res.status(200).json(group);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Group']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/groupDashboardsSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
 }

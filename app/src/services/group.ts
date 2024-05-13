@@ -1,7 +1,7 @@
 import { GroupRepositoryInterface, GroupInterface } from "../interfaces/group";
-import { AccountRepositoryInterface, AccountInterface } from "../interfaces/account";
 import { Group } from "../models/Group";
 import { Account } from "../models/Account";
+import { Dashboard } from "../models/Dashboard";
 import { dbDataSource } from "../configs/db.config";
 import {v4 as uuidv4} from 'uuid';
 import { dbUtils } from '../utils/db';
@@ -56,23 +56,29 @@ export class GroupService implements GroupRepositoryInterface {
         if(!groupToDelete){
             throw new Error("Group not found");
         }
-        await groupRepository.delete(groupToDelete);
+        await groupRepository.delete(groupToDelete.id);
         
         return groupToDelete;
     }
     async findById(id: string): Promise<GroupInterface | null> {
         const groupRepository = dbDataSource.getRepository(Group);
         const group = await groupRepository.findOneBy({ id });
+        if(!group){
+            throw new Error("Group not found");
+        }
         
         return group;
     }
     async findByName(name: string): Promise<GroupInterface | null> {
         const groupRepository = dbDataSource.getRepository(Group);
         const group = await groupRepository.findOneBy({ name });
+        if(!group){
+            throw new Error("Group not found");
+        }
         
         return group;    
     }
-    async addAccount(accountId: string, groupId: string): Promise<AccountInterface[]> {
+    async addAccount(accountId: string, groupId: string): Promise<GroupInterface> {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToAdd = await accountRepository.findOneBy( {id: accountId} );
         if(!accountToAdd){
@@ -84,19 +90,22 @@ export class GroupService implements GroupRepositoryInterface {
             throw new Error("Group not found");
         }
         
-        group.accounts = [accountToAdd];
-        await groupRepository.manager.save(group);
+        await groupRepository
+              .createQueryBuilder()
+              .relation(Group, 'accounts')
+              .of(group)
+              .add(accountToAdd);
         
-        const accounts = await accountRepository.find({
+        const accountsInGroup = await groupRepository.findOne({
             relations: {
-                groups: true,
+                accounts: true,
             },
-            where: { groups: group },
+            where: { id: group.id }
         });
         
-        return accounts;
+        return accountsInGroup;
     }
-    async deleteAccount(accountId: string, groupId: string): Promise<AccountInterface[]> {
+    async deleteAccount(accountId: string, groupId: string): Promise<GroupInterface> {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToDelete = await accountRepository.findOneBy( {id: accountId} );
         if(!accountToDelete){
@@ -118,29 +127,101 @@ export class GroupService implements GroupRepositoryInterface {
         });
         await groupRepository.manager.save(group);
 
-        const accounts = await accountRepository.find({
+        const accountsInGroup = await groupRepository.findOne({
             relations: {
-                groups: true,
+                accounts: true,
             },
-            where: { groups: group },
+            where: { id: group.id }
         });
         
-        return accounts;
+        return accountsInGroup;
     }
-    async listAccount(groupId: string): Promise<AccountInterface[]> {
+    async listAccount(id: string): Promise<GroupInterface> {
+        const groupRepository = dbDataSource.getRepository(Group);
+        const group = await groupRepository.findOneBy( { id } );
+        if(!group){
+            throw new Error("Group not found");
+        }
+        const accountsInGroup = await groupRepository.findOne({
+            relations: {
+                accounts: true,
+            },
+            where: { id: group.id }
+        });
+        
+        return accountsInGroup;
+    }
+    async addDashboard(dashboardId: string, groupId: string): Promise<GroupInterface> {
+        const dashboardRepository = dbDataSource.getRepository(Dashboard);
+        const dashboardToAdd = await dashboardRepository.findOneBy( {id: dashboardId} );
+        if(!dashboardToAdd){
+            throw new Error("Dashboard not found");
+        }
         const groupRepository = dbDataSource.getRepository(Group);
         const group = await groupRepository.findOneBy( {id: groupId} );
         if(!group){
             throw new Error("Group not found");
         }
-        const accountRepository = dbDataSource.getRepository(Account);
-        const accounts = await accountRepository.find({
+        
+        await groupRepository
+              .createQueryBuilder()
+              .relation(Group, 'dashboards')
+              .of(group)
+              .add(dashboardToAdd);
+        
+        const dashboardsInGroup = await groupRepository.findOne({
             relations: {
-                groups: true,
+                dashboards: true,
             },
-            where: { groups: group },
+            where: { id: group.id }
         });
         
-        return accounts;
+        return dashboardsInGroup;
+    }
+    async deleteDashboard(dashboardId: string, groupId: string): Promise<GroupInterface> {
+        const dashboardRepository = dbDataSource.getRepository(Dashboard);
+        const dashboardToDelete = await dashboardRepository.findOneBy( {id: dashboardId} );
+        if(!dashboardToDelete){
+            throw new Error("Dashboard not found");
+        }
+        const groupRepository = dbDataSource.getRepository(Group);
+        const group = await groupRepository.findOne({
+            relations: {
+                dashboards: true,
+            },
+            where: { id: groupId }
+        });
+        
+        if(!group){
+            throw new Error("Group not Found");
+        }
+        group.dashboards = group.dashboards.filter((dashboard) => {
+            return dashboard.id !== dashboardId;
+        });
+        await groupRepository.manager.save(group);
+
+        const dashboardsInGroup = await groupRepository.findOne({
+            relations: {
+                dashboards: true,
+            },
+            where: { id: group.id }
+        });
+        
+        return dashboardsInGroup;
+    }
+    async listDashboard(id: string): Promise<GroupInterface> {
+        const groupRepository = dbDataSource.getRepository(Group);
+        const group = await groupRepository.findOneBy( { id } );
+        if(!group){
+            throw new Error("Group not found");
+        }
+        const dashboardsInGroup = await groupRepository.findOne({
+            relations: {
+                dashboards: true,
+            },
+            where: { id: group.id }
+        });
+        
+        return dashboardsInGroup;
     }
 }

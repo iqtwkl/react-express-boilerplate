@@ -61,6 +61,53 @@ const doc = {
                     update_at: 'yyyy-mm-dd',
                 }
             ],
+            groupSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            groupInSchema: {
+                name: 'unique-name',
+            },
+            groupAccountsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                accounts: [
+                    {
+                        id: 'uuid-hash',
+                        username: 'unique-username',
+                        email: 'mail@email.com',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                    }
+                ],
+            },
+            groupAccountsInSchema: {
+                accountId: 'uuid-hash',
+                groupId: 'uuid-hash',
+            },
+            groupDashboardsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                dashboards: [
+                    {
+                        id: 'uuid-hash',
+                        name: 'unique-name',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                        kibanaId: 'uuid-hash',
+                    }
+                ],
+            },
+            groupDashboardsInSchema: {
+                dashboardId: 'uuid-hash',
+                groupId: 'uuid-hash',
+            },
             listGroupSchema: [
                 {
                     id: 'uuid-hash',
