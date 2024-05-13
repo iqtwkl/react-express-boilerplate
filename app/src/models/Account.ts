@@ -24,6 +24,9 @@ export class Account {
     @Column()
     password: string;
 
+    @Column()
+    is_admin: number;
+
     @ManyToMany(() => Group, (group) => group.accounts)
     groups: Group[];
   
