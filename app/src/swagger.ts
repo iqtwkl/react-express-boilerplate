@@ -113,7 +113,30 @@ const doc = {
                     create_at: 'yyyy-mm-dd',
                     update_at: 'yyyy-mm-dd',
                 }
-            ]
+            ],
+            dashboardSchema: {
+                id: 'uuid-hash',
+                title: 'unique-name',
+                url: 'dashboard-url',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            dashboardInSchema: {
+                dashboard: {
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                },
+                kibana_id: 'uuid-hash'
+            },
+            listDashboardSchema: [
+                {
+                    id: 'uuid-hash',
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
         }
     }
 };

@@ -17,7 +17,10 @@ export class Dashboard {
     id: string;
   
     @Column({unique: true})
-    name: string;
+    title: string;
+
+    @Column({unique: true})
+    url: string;
   
     @ManyToOne(() => KibanaConnection, (kibana) => kibana.dashboards)
     kibana: KibanaConnection;
