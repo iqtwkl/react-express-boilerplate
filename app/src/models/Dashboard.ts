@@ -1,4 +1,5 @@
 import {
+    ManyToOne,
     Column,
     CreateDateColumn,
     Entity,
@@ -7,27 +8,24 @@ import {
     ManyToMany,
 } from "typeorm";
 
+import { KibanaConnection } from "./KibanaConnection";
 import { Group } from "./Group";
-import { Dashboard } from "./Dashboard";
   
 @Entity()
-export class Account {
+export class Dashboard {
     @PrimaryGeneratedColumn("uuid")
     id: string;
   
     @Column({unique: true})
-    username: string;
-  
+    title: string;
+
     @Column({unique: true})
-    email: string;
+    url: string;
   
-    @Column()
-    password: string;
+    @ManyToOne(() => KibanaConnection, (kibana) => kibana.dashboards)
+    kibana: KibanaConnection;
 
-    @Column()
-    is_admin: number;
-
-    @ManyToMany(() => Group, (group) => group.accounts)
+    @ManyToMany(() => Group, (group) => group.dashboards)
     groups: Group[];
   
     @CreateDateColumn()

@@ -4,14 +4,10 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
-    ManyToMany,
 } from "typeorm";
-
-import { Group } from "./Group";
-import { Dashboard } from "./Dashboard";
   
 @Entity()
-export class Account {
+export class LogstashSetting {
     @PrimaryGeneratedColumn("uuid")
     id: string;
   
@@ -19,16 +15,16 @@ export class Account {
     username: string;
   
     @Column({unique: true})
-    email: string;
+    connection_name: string;
   
     @Column()
     password: string;
 
     @Column()
-    is_admin: number;
+    ip: string;
 
-    @ManyToMany(() => Group, (group) => group.accounts)
-    groups: Group[];
+    @Column()
+    directory: string;
   
     @CreateDateColumn()
     created_at: Date;

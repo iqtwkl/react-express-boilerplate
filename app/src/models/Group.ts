@@ -5,31 +5,29 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     ManyToMany,
+    JoinTable,
 } from "typeorm";
 
-import { Group } from "./Group";
 import { Dashboard } from "./Dashboard";
-  
+import { Account } from "./Account"; 
+
+
 @Entity()
-export class Account {
+export class Group {
     @PrimaryGeneratedColumn("uuid")
     id: string;
   
     @Column({unique: true})
-    username: string;
-  
-    @Column({unique: true})
-    email: string;
-  
-    @Column()
-    password: string;
+    name: string;
 
-    @Column()
-    is_admin: number;
-
-    @ManyToMany(() => Group, (group) => group.accounts)
-    groups: Group[];
+    @ManyToMany(() => Dashboard, (dashboard) => dashboard.groups)
+    @JoinTable()
+    dashboards: Dashboard[]
   
+    @ManyToMany(() => Account, (account) => account.groups)
+    @JoinTable()
+    accounts: Account[]
+
     @CreateDateColumn()
     created_at: Date;
   
