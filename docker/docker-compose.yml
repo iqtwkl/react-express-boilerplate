@@ -30,6 +30,7 @@ services:
     ports:
       - "5044:5044"
       - "9600:9600"
+    command: bin/logstash -f pipeline/logstash.conf --config.reload.automatic
     volumes:
       - ./config/logstash/:/usr/share/logstash/pipeline
       - ls_data:/usr/share/logstash/data
