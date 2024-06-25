@@ -12,7 +12,11 @@ const NavbarComponent = () => {
   };
 
   return (
-    <Navbar className='z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 justify-between rounded-lg shadow-sm'>
+    <Navbar className='fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 justify-between rounded-lg shadow-sm' fluid>
+      <Navbar.Brand>
+        <img src="/masagi-shortlogo-color.png" className="mr-3 h-6 sm:h-9" alt="Logo" /> 
+        <h3 className='self-center whitespace-nowrap text-2xl font-semibold text-gray-800 dark:text-white'> MASIFLog</h3>
+      </Navbar.Brand>
       <form action="#" method="GET" className="hidden lg:block lg:pl-3.5">
         <Label htmlFor="topbar-search" className="sr-only" value='Search' />
         <div className="relative mt-1 lg:w-96">
