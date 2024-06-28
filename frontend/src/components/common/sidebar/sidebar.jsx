@@ -7,7 +7,7 @@ import { HiChartPie, HiUser} from 'react-icons/hi';
 const SidebarComponent = () => {
   const theme = {
     "root": {
-        "inner": "h-full overflow-y-auto overflow-x-hidden rounded bg-[#629093] px-3 py-4 dark:bg-gray-800",
+        "inner": "h-full overflow-y-auto overflow-x-hidden px-3 py-4 dark:bg-gray-800",
     },
     "item": {
         "base": "flex items-center justify-center rounded-lg p-2 text-base font-normal text-gray-50 hover:bg-[#99B7B9] dark:text-white dark:hover:bg-gray-700",
@@ -28,13 +28,18 @@ const SidebarComponent = () => {
     }
   }
   return (
-    <aside className='fixed top-20 left-0 ml-4 mt-4 mb-4 z-20 flex-col flex-shrink-0 hidden w-64 h-full font-normal duration-75 lg:flex transition-width'>
-        <Sidebar theme={theme} aria-label="Masif Log" className='relative p-2 flex flex-col flex-1 min-h-0 pt-0 w-full mr-4 bg-[#629093] border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow-sm'>
-            <div className='pb-6'>
-                <p className='self-center whitespace-nowrap text-sm font-normal text-gray-50 dark:text-white'>Welcome back, </p>
-                <p className='self-center whitespace-nowrap text-lg font-medium text-gray-50 dark:text-white'>Genta Alima Persada</p>
+    <aside className='fixed top-20 left-0 mt-10 mb-4 z-20 flex-col flex-shrink-0 hidden w-64 h-full font-normal duration-75 lg:flex transition-width'>
+        <Sidebar 
+            theme={theme} 
+            aria-label="Masif Log" 
+            className='relative p-2 flex flex-col flex-1 min-h-0 pt-0 w-full mr-4 bg-[#629093] border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 shadow-sm'
+            style={{ borderTopRightRadius: '3.0rem' }}
+        >
+            <div className='pb-3 pt-5'>
+                <p className='self-center whitespace-nowrap text-sm font-normal text-gray-50 dark:text-white pb-4'>Welcome back, </p>
+                <p className='self-center whitespace-nowrap text-lg font-bold text-gray-50 dark:text-white'>Genta Alima Persada</p>
             </div> 
-            <hr className='pb-2 pt-2'/>
+            <hr className='pb-4 pt-4'/>
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Sidebar.Item href="/" icon={HiChartPie}>
@@ -48,6 +53,7 @@ const SidebarComponent = () => {
             </Sidebar.Items>
         </Sidebar>
     </aside>
+
   );
 }
 
