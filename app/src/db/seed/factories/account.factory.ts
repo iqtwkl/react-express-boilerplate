@@ -9,6 +9,7 @@ export const createAccountSeed = async () => {
     account.username = faker.internet.userName();
     account.email = faker.internet.exampleEmail();
     account.password = "somepassword";
+    account.is_admin = 1;
 
     const createdAccount = await service.create(account);
     console.log(`account added ${createdAccount.username}`);

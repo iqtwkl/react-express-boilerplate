@@ -29,6 +29,9 @@ export default function ErrorModalComponent(props: ErrorProps) {
     }
   }
 
+  console.log(error);
+  console.log(isError);
+
   return (
     <>
       <Modal show={isError} size="md" onClose={() => setIsError(false)} popup>

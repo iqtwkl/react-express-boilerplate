@@ -63,7 +63,7 @@ export function LoginPage() {
                                 <div className="text-center">
                                 <img
                                     className="mx-auto w-48"
-                                    src="/vite.svg"
+                                    src="/masagi-shortlogo-color.png"
                                     alt="logo" />
                                 <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                                     Boilerplate

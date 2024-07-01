@@ -1,5 +1,7 @@
 import { NextFunction, Response } from "express";
 import { CustomRequest } from "../interfaces/request";
+import { Account } from "../models/Account";
+import { dbDataSource } from "../configs/db.config";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
@@ -28,6 +30,19 @@ export class AuthMiddleware {
     } catch (error) {
       // Handle JWT verification errors more gracefully
       return res.status(401).json({ error: "Invalid token" });
+    }
+  }
+  static async isAdmin(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      const accountRepository = dbDataSource.getRepository(Account);
+      const account = await accountRepository.findOneBy( {id: req.currentUser.id} );
+      if (account && account.is_admin) {
+        next();
+      } else {
+        return res.status(401).json({ error: "Access denied" });
+      }
+    } catch (error) {
+      return res.status(401).json({ error: "Access denied" });
     }
   }
 }

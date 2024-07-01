@@ -60,7 +60,83 @@ const doc = {
                     create_at: 'yyyy-mm-dd',
                     update_at: 'yyyy-mm-dd',
                 }
-            ]
+            ],
+            groupSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            groupInSchema: {
+                name: 'unique-name',
+            },
+            groupAccountsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                accounts: [
+                    {
+                        id: 'uuid-hash',
+                        username: 'unique-username',
+                        email: 'mail@email.com',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                    }
+                ],
+            },
+            groupAccountsInSchema: {
+                accountId: 'uuid-hash',
+            },
+            groupDashboardsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                dashboards: [
+                    {
+                        id: 'uuid-hash',
+                        name: 'unique-name',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                        kibanaId: 'uuid-hash',
+                    }
+                ],
+            },
+            groupDashboardsInSchema: {
+                dashboardId: 'uuid-hash',
+            },
+            listGroupSchema: [
+                {
+                    id: 'uuid-hash',
+                    name: 'unique-name',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            dashboardSchema: {
+                id: 'uuid-hash',
+                title: 'unique-name',
+                url: 'dashboard-url',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            dashboardInSchema: {
+                dashboard: {
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                },
+                kibana_id: 'uuid-hash'
+            },
+            listDashboardSchema: [
+                {
+                    id: 'uuid-hash',
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
         }
     }
 };

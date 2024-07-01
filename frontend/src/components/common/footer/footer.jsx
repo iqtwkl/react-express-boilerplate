@@ -9,9 +9,9 @@ const FooterComponent = () => {
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
           <Footer.Brand
             href="/"
-            src="/vite.svg"
-            alt="Vite Logo"
-            name="Boilerplate"
+            src="/masagi-shortlogo-color.png"
+            alt="Masif Log"
+            name="MASIFLog"
           />
           <Footer.LinkGroup>
             <Footer.Link href="#">About</Footer.Link>
