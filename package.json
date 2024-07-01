@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "MASIFLog FS App",
   "main": "index.js",
-  "repository": "https://github.com/iqtwkl/react-express-boilerplate",
+  "repository": "git@github.com:Mitra-Solusi-Aktual-Integrasi/masiflog-dashboarding.git",
   "author": "Iqbal Tawakal <iqtwkl@gmail.com>, Evander Tokang <tokang.evander@gmail.com>",
   "license": "MIT",
   "private": false,
