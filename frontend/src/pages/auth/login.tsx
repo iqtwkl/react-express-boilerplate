@@ -4,13 +4,14 @@ import FooterComponent from '../../components/common/footer/footer';
 import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
-import ErrorModalComponent from "../../components/common/error";
+import ErrorModalComponent, { ApplicationError } from "../../components/common/error";
+import { AxiosError } from "axios";
 
 export function LoginPage() {
     const navigate = useNavigate();
     const { isLoggedIn, setLoggedIn, token, setToken } = useAuth(); 
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState<ApplicationError>(Object);
 
     const [data, setData] = useState({
         username: '',
@@ -35,8 +36,8 @@ export function LoginPage() {
             const response = await api.login(data.username, data.password);
             setToken(response.token);
             setLoggedIn(response.success);
-        } catch(error: Error | any) {
-            setError(error.response.data.error);
+        } catch(error: AxiosError | any) {
+            setError(new ApplicationError(error.response.status, error.response.statusText));
             setIsError(true);
         }       
     };
