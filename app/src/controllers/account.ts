@@ -95,7 +95,8 @@ export class AccountController {
         */
         try {
             const accountService =  new AccountService()
-            const account = await accountService.create(req.body);
+            var account = await accountService.create(req.body);
+            account = await accountService.addProfile(account, null)
             
             //remove password from response
             delete account.password;

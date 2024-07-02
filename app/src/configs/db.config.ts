@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { DataSource } from "typeorm";
 import { Account } from '../models/Account';
+import { Profile } from '../models/Profile';
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ const env = process.env;
 export const dbDataSource = new DataSource({
   type: "sqlite",
   database: `./data/datasource.sqlite3`,
-  entities: [ Account ],
+  entities: [ Account, Profile ],
   logging: true,
   synchronize: true,
 });

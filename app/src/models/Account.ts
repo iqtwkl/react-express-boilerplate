@@ -2,9 +2,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { Profile } from "./Profile";
   
 @Entity()
 export class Account {
@@ -25,4 +27,7 @@ export class Account {
   
     @UpdateDateColumn()
     updated_at: Date;
+
+    @OneToOne(() => Profile, profile => profile.account, { onDelete: 'CASCADE' })
+    profile: Profile;
 }
