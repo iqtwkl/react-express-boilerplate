@@ -28,6 +28,6 @@ export class Account {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @OneToOne(() => Profile, profile => profile.account)
+    @OneToOne(() => Profile, profile => profile.account, { onDelete: 'CASCADE' })
     profile: Profile;
 }
