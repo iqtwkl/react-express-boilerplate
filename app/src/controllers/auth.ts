@@ -18,32 +18,30 @@ export class AuthController {
             #swagger.tags = ['Auth'] 
         */
         try {
+            const { username, password } = req.body;
 
-        } catch(error) {
-            res.status(500).json({"error": error})
-        }
-        const { username, password } = req.body;
-
-        const accountService = new AccountService();
-        const account = await accountService.findByUsername(username);
-    
-        if (!account) {
-            return res.status(404).json({ status: false, error: "Account not found" });
-        }
+            const accountService = new AccountService();
+            const account = await accountService.findByUsername(username);
         
-        const isPasswordMatch = await bcrypt.compare(password, account.password);
-    
-        if (!isPasswordMatch) {
-            return res.status(401).json({ status: false, error: "Invalid credentials" });
-        }
-        // generate token
-        const token = encrypt.generateToken({ id: account.id });
+            if (!account) {
+                return res.status(404).json({ status: false, error: "Account not found" });
+            }
+            
+            const isPasswordMatch = await bcrypt.compare(password, account.password);
+        
+            if (!isPasswordMatch) {
+                return res.status(401).json({ status: false, error: "Invalid credentials" });
+            }
+            // generate token
+            const token = encrypt.generateToken({id: account.id, username: account.username, email: account.email});
 
-        res.status(200).json({
-            success: true,
-            token: token,
-            // refresh: 'sometoken'
-        });
+            res.status(200).json({
+                success: true,
+                token: token,
+            });
+        } catch(error) {
+            res.status(500).json({"error": error.message})
+        }
         /* #swagger.responses[200] = {
                 description: "",
                 content: {
