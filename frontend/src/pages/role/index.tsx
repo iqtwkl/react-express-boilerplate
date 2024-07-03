@@ -5,6 +5,7 @@ import { ApplicationError } from '../../components/common/error';
 export function RoleIndexPage() {
     const [isError, setIsError] = useState(false);
     const [error] = useState<ApplicationError>(Object);
+
     const breadcrumbList = [
         { href: '', name: 'Role' },
     ];

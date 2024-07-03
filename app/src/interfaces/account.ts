@@ -3,6 +3,7 @@ export interface AccountInterface {
     username: string;
     email: string;
     password: string;
+    is_admin: number;
     created_at: Date;
     updated_at: Date;
     profile: ProfileInterface;

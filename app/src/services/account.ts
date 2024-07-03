@@ -35,6 +35,7 @@ export class AccountService implements AccountRepositoryInterface {
         newAccount.username = account.username;
         newAccount.email = account.email;
         newAccount.password = hashPassword;
+        newAccount.is_admin = account.is_admin;
 
         // create account process
         const accountRepository = dbDataSource.getRepository(Account);

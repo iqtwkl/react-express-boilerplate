@@ -1,13 +1,14 @@
 {
   "name": "react-express-boilerplate",
   "version": "0.0.1",
-  "description": "boilerplate for react and express app",
+  "description": "MASIFLog FS App",
   "main": "index.js",
-  "repository": "https://github.com/iqtwkl/react-express-boilerplate",
-  "author": "Iqbal Tawakal <iqtwkl@gmail.com>",
+  "repository": "git@github.com:Mitra-Solusi-Aktual-Integrasi/masiflog-dashboarding.git",
+  "author": "Iqbal Tawakal <iqtwkl@gmail.com>, Evander Tokang <tokang.evander@gmail.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/express": "^4.17.21",
     "@types/faker": "^6.6.9",
     "bcrypt": "^5.1.1",
