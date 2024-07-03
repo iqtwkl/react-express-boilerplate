@@ -19,7 +19,7 @@ export function KibanaSettings() {
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 5;
 
-    function handleFilter(event) {
+    function handleFilter(event:React.ChangeEvent<HTMLInputElement>) {
         const newTerm = event.target.value.toLowerCase();
         setSearchTerm(newTerm);
         const filteredData = allConnections.filter(connection => {
@@ -29,7 +29,7 @@ export function KibanaSettings() {
         setCurrentPage(1);
     }
 
-    function changePage(pageNumber) {
+    function changePage(pageNumber:number) {
         const filteredData = allConnections.filter(connection => {
             return connection.name.toLowerCase().includes(searchTerm);
         });
