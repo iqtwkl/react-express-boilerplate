@@ -208,6 +208,35 @@ export class AccountController {
         }   
         */
     }
+    static async profile(req: CustomRequest, res: Response) {
+        try {
+          const accountService =  new AccountService();
+          const account = await accountService.findById(req.currentUser.id);
+          
+          //remove password from response
+          delete account.password;
+
+          res.status(200).json(account);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Account']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/accountSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
     static async updateProfile(req: CustomRequest, res: Response) {
         /*  #swagger.requestBody = {
             required: true,
@@ -226,7 +255,6 @@ export class AccountController {
         */
         try {
             const accountService =  new AccountService();
-            console.log(req.currentUser);
             const selectedAccount = await accountService.findById(req.currentUser.id);
 
             // if account not found
