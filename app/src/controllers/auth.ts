@@ -33,7 +33,12 @@ export class AuthController {
                 return res.status(401).json({ status: false, error: "Invalid credentials" });
             }
             // generate token
-            const token = encrypt.generateToken({id: account.id, username: account.username, email: account.email, fullName: account.profile.fullName});
+            const token = encrypt.generateToken({
+                id: account.id, 
+                username: account.username, 
+                email: account.email, 
+                fullName: account.profile ? account.profile.fullName : null
+            });
 
             res.status(200).json({
                 success: true,
