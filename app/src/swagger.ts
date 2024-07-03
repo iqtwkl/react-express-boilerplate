@@ -60,7 +60,12 @@ const doc = {
                     create_at: 'yyyy-mm-dd',
                     update_at: 'yyyy-mm-dd',
                 }
-            ]
+            ],
+            profileInSchema: {
+                fullName: 'John Doe',
+                bio: 'I am Human',
+                avatarUrl: '/default-user.png'
+            }
         }
     }
 };

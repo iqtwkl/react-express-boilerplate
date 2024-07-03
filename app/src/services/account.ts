@@ -63,6 +63,22 @@ export class AccountService implements AccountRepositoryInterface {
     
         return this.findById(account.id);
     }
+    async updateProfile(account: AccountInterface, profile: ProfileInterface | null): Promise<AccountInterface> {
+        const profileToUpdate = account.profile as Profile;
+        if (!profileToUpdate) {
+            throw new Error("User not found");
+        }
+        profileToUpdate.fullName = profile.fullName;
+        profileToUpdate.bio = profile.bio;
+        profileToUpdate.avatarUrl = profile.avatarUrl;
+        profileToUpdate.accountId = account.id;
+    
+        const profileRepository = dbDataSource.getRepository(Profile);
+    
+        await profileRepository.save(profileToUpdate);
+    
+        return this.findById(account.id);
+    }
     async update(id: string, account: AccountInterface): Promise<AccountInterface> {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToUpdate = await accountRepository.findOneBy({ id });
