@@ -2,7 +2,7 @@
 'use client';
 
 import { Sidebar } from 'flowbite-react';
-import { HiChartPie, HiUser} from 'react-icons/hi';
+import { HiChartPie, HiUser, HiCog} from 'react-icons/hi';
 
 const SidebarComponent = () => {
   const theme = {
@@ -32,7 +32,7 @@ const SidebarComponent = () => {
         <Sidebar theme={theme} aria-label="Masif Log" className='relative p-2 flex flex-col flex-1 min-h-0 pt-0 w-full mr-4 bg-[#629093] border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow-sm'>
             <div className='pb-6'>
                 <p className='self-center whitespace-nowrap text-sm font-normal text-gray-50 dark:text-white'>Welcome back, </p>
-                <p className='self-center whitespace-nowrap text-lg font-medium text-gray-50 dark:text-white'>Genta Alima Persada</p>
+                <p className='self-center whitespace-nowrap font-[Coda,sans-serif] text-lg font-bold text-gray-50 dark:text-white'>Genta Alima Persada</p>
             </div> 
             <hr className='pb-2 pt-2'/>
             <Sidebar.Items>
@@ -44,6 +44,9 @@ const SidebarComponent = () => {
                         <Sidebar.Item href="/account">Accounts</Sidebar.Item>
                         <Sidebar.Item href="/role">Role</Sidebar.Item>
                     </Sidebar.Collapse>
+                    <Sidebar.Item href="/connection" icon={HiCog}>
+                        Connection
+                    </Sidebar.Item>
                 </Sidebar.ItemGroup>
             </Sidebar.Items>
         </Sidebar>

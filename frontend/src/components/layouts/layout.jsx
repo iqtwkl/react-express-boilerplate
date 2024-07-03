@@ -34,8 +34,9 @@ const RootLayout = (
                             <BreadcrumbComponent list={breadcrumbList} />
                             <PageTitleComponent title={title} />
                             <div className='min-h-fit mt-4'>
-                                <div className='p-4 bg-[#629093] text-gray-50 border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-4 dark:bg-gray-800'>
+                                <div className='p-4 bg-[#629093] text-gray-50 border border-gray-200 rounded-3xl shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-4 dark:bg-gray-800'>
                                     {children}
+                                    <br />
                                 </div>
                             </div>
                             <FooterComponent />

@@ -1,0 +1,35 @@
+{
+    "connections":
+    [
+        {
+            "id": 1,
+            "name": "Genta",
+            "ip-address": "192.168.1.1",
+            "author": "Viewer"
+        },
+        {
+            "id": 2,
+            "name": "Evander",
+            "ip-address": "192.168.1.1",
+            "author": "Editor"
+        },
+        {
+            "id": 3,
+            "name": "Iqbal",
+            "ip-address": "192.168.1.1",
+            "author": "Admin"
+        },
+        {
+            "id": 4,
+            "name": "Suci",
+            "ip-address": "192.168.1.1",
+            "author": "Viewer"
+        },
+        {
+            "id": 5,
+            "name": "Rivani",
+            "ip-address": "192.168.1.1",
+            "author": "Contributor"
+        }
+    ]
+}
