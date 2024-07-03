@@ -66,7 +66,7 @@ export class AccountService implements AccountRepositoryInterface {
     async updateProfile(account: AccountInterface, profile: ProfileInterface | null): Promise<AccountInterface> {
         const profileToUpdate = account.profile as Profile;
         if (!profileToUpdate) {
-            throw new Error("User not found");
+            throw new Error("Profile not found");
         }
         profileToUpdate.fullName = profile.fullName;
         profileToUpdate.bio = profile.bio;
@@ -83,7 +83,7 @@ export class AccountService implements AccountRepositoryInterface {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToUpdate = await accountRepository.findOneBy({ id });
         if (!accountToUpdate) {
-            throw new Error("User not found");
+            throw new Error("Account not found");
         }
         accountToUpdate.username = account.username;
         accountToUpdate.email = account.email;
@@ -96,7 +96,7 @@ export class AccountService implements AccountRepositoryInterface {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToDelete = await accountRepository.findOneBy({ id });
         if (!accountToDelete) {
-            throw new Error("User not found");
+            throw new Error("Account not found");
         }
         await accountRepository.delete(accountToDelete.id);
 

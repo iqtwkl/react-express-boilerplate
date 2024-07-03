@@ -231,7 +231,7 @@ export class AccountController {
 
             // if account not found
             if (!selectedAccount) {
-                return res.status(404).json({"error": "account not found"})
+                return res.status(404).json({"error": `account not found currentUser: ${req.currentUser}`})
             }
 
             const account = await accountService.updateProfile(selectedAccount, req.body);
@@ -241,7 +241,7 @@ export class AccountController {
 
             res.status(200).json(account);
         } catch (error) {
-            res.status(500).json({ "error": error.message });
+            res.status(500).json({ "error": `${error.message} currentUser: ${req.currentUser}` });
         }
         /* #swagger.responses[200] = {
             description: "",
