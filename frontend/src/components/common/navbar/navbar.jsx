@@ -5,7 +5,7 @@ import { Avatar, Dropdown, Navbar, DarkThemeToggle, TextInput, Label } from 'flo
 import { useAuth } from '../../../hooks/AuthContext';
 
 const NavbarComponent = () => {
-  const { logout } = useAuth();
+  const { logout, loggedUser } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -45,8 +45,8 @@ const NavbarComponent = () => {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+            <span className="block text-sm">{loggedUser.fullName}</span>
+            <span className="block truncate text-sm font-medium">{loggedUser.email}</span>
           </Dropdown.Header>
           <Dropdown.Item href='/'>Dashboard</Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>

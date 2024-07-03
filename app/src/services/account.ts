@@ -1,9 +1,10 @@
-import { AccountRepositoryInterface, AccountInterface } from "../interfaces/account";
+import { AccountRepositoryInterface, AccountInterface, ProfileInterface } from "../interfaces/account";
 import { Account } from "../models/Account";
 import { dbDataSource } from "../configs/db.config";
 import { encrypt } from "../utils/encriptor";
 import {v4 as uuidv4} from 'uuid';
 import { dbUtils } from '../utils/db'
+import { Profile } from "../models/Profile";
 
 export class AccountService implements AccountRepositoryInterface {
     async findAll(
@@ -43,6 +44,26 @@ export class AccountService implements AccountRepositoryInterface {
 
         return newAccount;
     }
+    async addProfile(account: AccountInterface, profile: ProfileInterface | null): Promise<AccountInterface> {
+        const newProfile = new Profile();
+        if (!profile) {
+            newProfile.fullName = account.username;
+            newProfile.bio = 'I am a Person';
+            newProfile.avatarUrl = '/default-user.png';
+            newProfile.accountId = account.id;
+        } else {
+            newProfile.fullName = profile.fullName;
+            newProfile.bio = profile.bio;
+            newProfile.avatarUrl = profile.avatarUrl;
+            newProfile.accountId = account.id;
+        }
+    
+        const profileRepository = dbDataSource.getRepository(Profile);
+    
+        await profileRepository.save(newProfile);
+    
+        return this.findById(account.id);
+    }
     async update(id: string, account: AccountInterface): Promise<AccountInterface> {
         const accountRepository = dbDataSource.getRepository(Account);
         const accountToUpdate = await accountRepository.findOneBy({ id });
@@ -68,13 +89,24 @@ export class AccountService implements AccountRepositoryInterface {
     }
     async findById(id: string): Promise<AccountInterface | null> {
         const accountRepository = dbDataSource.getRepository(Account);
-        const account = await accountRepository.findOneBy({ id })
+        const account = await accountRepository.findOne({
+            relations: {
+                profile: true,
+            },
+            where: { id }
+        });
+        
 
         return account;
     }
     async findByUsername(username: string): Promise<AccountInterface | null> {
         const accountRepository = dbDataSource.getRepository(Account);
-        const account = await accountRepository.findOneBy({ username });
+        const account = await accountRepository.findOne({
+            relations: {
+                profile: true,
+            },
+            where: { username }
+        });
         
         return account;
     }

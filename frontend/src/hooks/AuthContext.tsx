@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { AccountSessionInterface } from '../components/entity/account';
+import { jwtDecode } from 'jwt-decode';
 
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -9,7 +11,10 @@ type AuthContextType = {
     setLoggedIn: (loggedIn: boolean) => void;
     token: string;
     setToken: (token: string) => void;
+    loggedUser: AccountSessionInterface;
+    setLoggedUser: (loggedUser: AccountSessionInterface) => void;
     logout: () => void;
+    setUserFromToken: (token: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,10 +31,37 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
         return storedIsLoggedIn ? JSON.parse(storedIsLoggedIn) : false;
-      });
-      const [token, setToken] = useState<string>(() => {
+    });
+    const [token, setToken] = useState<string>(() => {
         return localStorage.getItem('token') || '';
-      });
+    });
+    const [loggedUser, setLoggedUser] = useState<AccountSessionInterface>(
+        {
+            id: '0', 
+            username: 'Guest', 
+            fullName: 'Guest User', 
+            email: 'guest@user.com'
+        }
+    );
+
+    const setUserFromToken = (token: string) => {
+        if(token == '') {
+            setLoggedUser({
+                id: '0', 
+                username: 'Guest', 
+                fullName: 'Guest User', 
+                email: 'guest@user.com'
+            });
+        }
+
+        const tokenPayload = jwtDecode(token) as AccountSessionInterface;
+        setLoggedUser({
+            id: tokenPayload.id, 
+            username: tokenPayload.username, 
+            fullName: tokenPayload.fullName, 
+            email: tokenPayload.email
+        });
+    }
 
     useEffect(() => {
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
@@ -40,6 +72,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
             setToken(storedToken);
+            setUserFromToken(storedToken);
         }
     }, []);
 
@@ -59,7 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn: setIsLoggedIn, token, setToken, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn: setIsLoggedIn, token, setToken, logout, loggedUser, setLoggedUser, setUserFromToken }}>
             {children}
         </AuthContext.Provider>
     );

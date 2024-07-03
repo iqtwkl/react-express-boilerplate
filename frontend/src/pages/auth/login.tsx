@@ -9,7 +9,7 @@ import CreateAccount from "./signup";
 
 export function LoginPage() {
     const navigate = useNavigate();
-    const { isLoggedIn, setLoggedIn, token, setToken } = useAuth(); 
+    const { isLoggedIn, setLoggedIn, token, setToken, setUserFromToken } = useAuth(); 
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState<ApplicationError>(Object);
     const [showCreateAccount, setShowCreateAccount] = useState(false);
@@ -35,6 +35,7 @@ export function LoginPage() {
             const response = await api.login(data.username, data.password);
             setToken(response.token);
             setLoggedIn(response.success);
+            setUserFromToken(response.token);
         } catch(error: AxiosError | any) {
             setError(new ApplicationError(error.response.status, error.response.statusText));
             setIsError(true);
