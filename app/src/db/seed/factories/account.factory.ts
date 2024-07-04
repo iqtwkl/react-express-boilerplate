@@ -10,6 +10,7 @@ export const createAccountSeed = async () => {
     account.username = faker.internet.userName();
     account.email = faker.internet.exampleEmail();
     account.password = "somepassword";
+    account.is_admin = 1;
 
     const profile = new Profile();
     profile.fullName = faker.person.fullName();

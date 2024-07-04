@@ -141,8 +141,8 @@ export function AccountIndexPage() {
     }, [account]);
 
     const columnConfig = [
-        { header: 'User Name', accessor: 'username' },
-        { header: 'Email', accessor: 'email' },
+        { header: 'User Name', accessor: 'username', asIs: false },
+        { header: 'Email', accessor: 'email', asIs: false },
         { header: '', body: crudAction, asIs: true } 
     ];
 
