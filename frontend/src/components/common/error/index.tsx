@@ -1,6 +1,6 @@
 import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from "react-icons/hi"
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../../hooks/AuthContext';
 
 export class ApplicationError extends Error {
   status: number;
@@ -39,7 +39,7 @@ export default function ErrorModalComponent(props: ErrorProps) {
             <h3 className="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">
               Something went wrong! Please try again.
             </h3>
-            <p className='mb-5'>{error.message}</p>
+            <p className='mb-5'>{error && error.message ? error.message : ''}</p>
             <div className="flex justify-center gap-4">
               <Button color="gray" onClick={handleButtonClick}>
                 Ok

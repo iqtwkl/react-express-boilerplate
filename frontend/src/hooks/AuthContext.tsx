@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AccountSessionInterface } from '../components/entity/account';
 import { jwtDecode } from 'jwt-decode';
+import { Navigate } from 'react-router-dom';
 
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -89,6 +90,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
         setToken('');
+        return <Navigate to="/auth/login" />;
       };
 
     return (

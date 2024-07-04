@@ -21,8 +21,8 @@ const FooterComponent = () => {
           </Footer.LinkGroup>
         </div>
         <Footer.Divider />
-        <Footer.Copyright href="#" by="Flowbite™" year={2022} />
-      </div>
+        <Footer.Copyright href="#" by="Iqbal Tawakal" year={new Date().getFullYear()} />
+      </div>a
     </Footer>
   );
 }
