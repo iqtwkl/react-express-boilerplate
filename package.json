@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "description": "MASIFLog FS App",
   "main": "index.js",
-  "repository": "https://github.com/iqtwkl/react-express-boilerplate",
+  "repository": "git@github.com:Mitra-Solusi-Aktual-Integrasi/masiflog-dashboarding.git",
   "author": "Iqbal Tawakal <iqtwkl@gmail.com>, Evander Tokang <tokang.evander@gmail.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
     "@types/express": "^4.17.21",
+    "@types/faker": "^6.6.9",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -26,5 +27,8 @@
     "start": "npx ts-node app/src/swagger.ts && npx ts-node index.ts",
     "build": "npx tsc",
     "db:seed": "npx ts-node app/src/db/seed/seeds/initialSeed.ts"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }
