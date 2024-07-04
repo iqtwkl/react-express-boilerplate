@@ -1,4 +1,4 @@
-import { ThemeModeScript, Flowbite, Footer } from 'flowbite-react';
+import { ThemeModeScript, Flowbite } from 'flowbite-react';
 import SidebarComponent from '../common/sidebar/sidebar'
 import NavbarComponent from '../common/navbar/navbar';
 import FooterComponent from '../common/footer/footer';

@@ -3,12 +3,12 @@ import { Button } from "flowbite-react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { useEffect, useState } from 'react';
 import LoadingComponent from '../../components/common/loading';
-import { ApplicationError } from '../../components/common/error';
 import { AccountAPI } from '../../services/api/account';
 import { useAuth } from '../../hooks/AuthContext';
 import { AccountInterface } from '../../components/entity/account';
 import { CreateModal, DeleteModal, EditModal } from './modal';
 import CrudTableComponent from '../../components/common/table/crud';
+import { ApplicationError } from '../../components/common/error';
 
 export function AccountIndexPage() {
     const [isError, setIsError] = useState(false);

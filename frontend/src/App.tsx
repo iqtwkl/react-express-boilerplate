@@ -5,6 +5,7 @@ import { LoginPage } from './pages/auth/login';
 import { AuthProvider } from './hooks/AuthContext';
 import { AccountIndexPage } from './pages/account';
 import { RoleIndexPage } from './pages/role';
+import { ErrorNotFoundPage } from './pages/404';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/auth/login" element={<LoginPage/>} />
           <Route path="/account" element={<AccountIndexPage/>} />
           <Route path="/role" element={<RoleIndexPage/>} />
+          <Route path="*" element={<ErrorNotFoundPage/>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
