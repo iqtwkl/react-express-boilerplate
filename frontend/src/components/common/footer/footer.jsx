@@ -21,7 +21,7 @@ const FooterComponent = () => {
           </Footer.LinkGroup>
         </div>
         <Footer.Divider />
-        <Footer.Copyright href="#" by="Iqbal Tawakal" year={new Date().getFullYear()} />
+        <Footer.Copyright href="#" by="Mitra Solusi Aktual Integrasi" year={new Date().getFullYear()} />
       </div>a
     </Footer>
   );
