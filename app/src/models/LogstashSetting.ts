@@ -11,7 +11,7 @@ export class LogstashSetting {
     @PrimaryGeneratedColumn("uuid")
     id: string;
   
-    @Column({unique: true})
+    @Column()
     username: string;
   
     @Column({unique: true})
@@ -25,6 +25,18 @@ export class LogstashSetting {
 
     @Column()
     directory: string;
+
+    @Column()
+    input_path: string;
+
+    @Column()
+    grok_pattern: string;
+
+    @Column()
+    elasticsearch_host: string;
+
+    @Column()
+    index_name: string;
   
     @CreateDateColumn()
     created_at: Date;

@@ -14,7 +14,7 @@ export class KibanaConnection {
     @PrimaryGeneratedColumn("uuid")
     id: string;
   
-    @Column({unique: true})
+    @Column()
     username: string;
   
     @Column({unique: true})

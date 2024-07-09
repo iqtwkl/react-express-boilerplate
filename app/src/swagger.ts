@@ -39,6 +39,13 @@ const doc = {
                 token: 'token',
                 refresh: 'refresh-token',
             },
+            requestResetPasswordInSchema: {
+                email: 'mail@email.com'
+            },
+            resetPasswordInSchema: {
+                token: 'token',
+                newPassword: 'somepassword'
+            },
             accountSchema: {
                 id: 'uuid-hash',
                 username: 'unique-username',
@@ -50,6 +57,7 @@ const doc = {
                 username: 'unique-username',
                 password: 'somepassword',
                 email: 'mail@email.com',
+                is_admin: 0,
             },
             listAccountSchema: [
                 {
@@ -137,6 +145,70 @@ const doc = {
                     update_at: 'yyyy-mm-dd',
                 }
             ],
+            kibanaSchema: {
+                id: "uuid-hash",
+                username: "unique-username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listKibanaSchema: [
+                {
+                    id: "uuid-hash",
+                    username: "unique-username",
+                    connection_name: "unique-name",
+                    password: "somepassword",
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            kibanaInSchema: {
+                username: "unique-username",
+                connection_name: "unique-name",
+                password: "somepassword",
+            },
+            logstashSchema: {
+                id: 'uuid-hash',
+                username: 'unique-name',
+                connection_name: 'host-ip',
+                password: 'ssh-username',
+                ip: 'ssh-password',
+                directory: 'remote-path',
+                input_path: 'input-path',
+                grok_pattern: 'grok-pattern',
+                elasticsearch_host: 'elasticsearch-host',
+                index_name: 'index-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listLogstashSchema: [
+                {
+                    id: 'uuid-hash',
+                    username: 'unique-name',
+                    connection_name: 'host-ip',
+                    password: 'ssh-username',
+                    ip: 'ssh-password',
+                    directory: 'remote-path',
+                    input_path: 'input-path',
+                    grok_pattern: 'grok-pattern',
+                    elasticsearch_host: 'elasticsearch-host',
+                    index_name: 'index-name',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            logstashInSchema: {
+                connection_name: 'unique-name',
+                ip: 'host-ip',
+                username: 'ssh-username',
+                password: 'ssh-password',
+                directory: 'remote-path',
+                input_path: 'input-path',
+                grok_pattern: 'grok-pattern',
+                elasticsearch_host: 'elasticsearch-host',
+                index_name: 'index-name'
+            }
         }
     }
 };

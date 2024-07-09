@@ -4,9 +4,9 @@ import { AuthMiddleware } from '../../middlewares/authSession';
 
 export const dashboardRoutes = express.Router();
 
-dashboardRoutes.get('/dashboards', DashboardController.findAll);
-dashboardRoutes.get('/dashboard/:id', DashboardController.findById);
-dashboardRoutes.get('/dashboard/title/:title', DashboardController.findByTitle);
-dashboardRoutes.post('/dashboard', DashboardController.create);
-dashboardRoutes.put('/dashboard/:id', DashboardController.update);
-dashboardRoutes.delete('/dashboard/:id', DashboardController.delete);
+dashboardRoutes.get('/dashboards', AuthMiddleware.isAuthenticated,  DashboardController.findAll);
+dashboardRoutes.get('/dashboard/:id', AuthMiddleware.isAuthenticated, DashboardController.findById);
+dashboardRoutes.get('/dashboard/title/:title', AuthMiddleware.isAuthenticated, DashboardController.findByTitle);
+dashboardRoutes.post('/dashboard', AuthMiddleware.isAuthenticated, AuthMiddleware.isAdmin, DashboardController.create);
+dashboardRoutes.put('/dashboard/:id', AuthMiddleware.isAuthenticated, AuthMiddleware.isAdmin, DashboardController.update);
+dashboardRoutes.delete('/dashboard/:id', AuthMiddleware.isAuthenticated, AuthMiddleware.isAdmin, DashboardController.delete);
