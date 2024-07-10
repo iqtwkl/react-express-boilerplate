@@ -1,13 +1,11 @@
-'use client';
-
 import { Footer } from 'flowbite-react';
 
 const FooterComponent = () => {
   return (
-    <Footer container className='mt-10 bottom-0'>
+    <Footer container className='mt-10 bottom-0 border-none shadow-none' style={{ background: 'none' }}>
       <div className="w-full text-center">
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-          <Footer.Brand
+          {/* <Footer.Brand
             href="/"
             src="/masagi-shortlogo-color.png"
             alt="Masif Log"
@@ -18,11 +16,16 @@ const FooterComponent = () => {
             <Footer.Link href="#">Privacy Policy</Footer.Link>
             <Footer.Link href="#">Licensing</Footer.Link>
             <Footer.Link href="#">Contact</Footer.Link>
-          </Footer.LinkGroup>
+          </Footer.LinkGroup> */}
         </div>
-        <Footer.Divider />
-        <Footer.Copyright href="#" by="Mitra Solusi Aktual Integrasi" year={new Date().getFullYear()} />
-      </div>a
+        <Footer.Divider style={{ color: '#D0DEDF' }} />
+        <Footer.Copyright 
+          href="#" 
+          by="MASIFLog™" 
+          year={new Date().getFullYear()} 
+          style={{ color: '#D0DEDF' , fontWeight: 'bold'}} 
+        />
+      </div>
     </Footer>
   );
 }
