@@ -5,7 +5,8 @@ import { Sidebar } from 'flowbite-react';
 import { HiChartPie, HiUser} from 'react-icons/hi';
 
 const SidebarComponent = () => {
-  const theme = {
+    
+    const theme = {
     "root": {
         "inner": "h-full overflow-y-auto overflow-x-hidden px-3 py-4 dark:bg-gray-800",
     },
@@ -21,13 +22,13 @@ const SidebarComponent = () => {
         "icon":{
             "base": "h-6 w-6 text-gray-50 transition duration-75 group-hover:text-gray-100 dark:text-gray-400 dark:group-hover:text-white",
             "open": {
-              "off": "",
-              "on": "text-gray-100"
+                "off": "",
+                "on": "text-gray-100"
             }
         }
     }
-  }
-  return (
+    }
+    return (
     <aside className='fixed top-20 left-0 mt-10 mb-4 z-20 flex-col flex-shrink-0 hidden w-64 h-full font-normal duration-75 lg:flex transition-width'>
         <Sidebar 
             theme={theme} 
@@ -43,7 +44,7 @@ const SidebarComponent = () => {
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Sidebar.Item href="/" icon={HiChartPie}>
-                        Dashboard
+                        Dashboards
                     </Sidebar.Item>
                     <Sidebar.Collapse icon={HiUser} label="Accounts">
                         <Sidebar.Item href="/account">Accounts</Sidebar.Item>
@@ -54,7 +55,7 @@ const SidebarComponent = () => {
         </Sidebar>
     </aside>
 
-  );
+    );
 }
 
 export default SidebarComponent;
