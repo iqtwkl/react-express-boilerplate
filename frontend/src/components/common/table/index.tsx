@@ -2,9 +2,9 @@ import { Table } from "flowbite-react";
 
 interface IMapper {
   header: string,
-  accessor: string,
-  asIs: boolean,
-  body: (obj: any) => void,
+  accessor?: string,
+  asIs?: boolean,
+  body?: (obj: any) => void,
 }
 
 export interface ITableProps {
@@ -24,7 +24,7 @@ const TableComponent = (props: ITableProps) => {
         {columns.map((column, index) => (
           <Table.Cell key={column.accessor} className={index == 0 ? 'whitespace-nowrap font-medium text-gray-900 dark:text-white' : '' }>
             
-            { column.asIs ? column.body(item) : item[column.accessor] }
+            { column.asIs ? (column.body ? column.body(item) : '') : ( column.accessor ? item[column.accessor] : '' ) }
           </Table.Cell>
         ))}
       </Table.Row>

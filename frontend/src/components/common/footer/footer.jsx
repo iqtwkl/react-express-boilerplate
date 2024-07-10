@@ -22,7 +22,7 @@ const FooterComponent = () => {
         <Footer.Copyright 
           href="#" 
           by="MASIFLog™" 
-          year={2024} 
+          year={new Date().getFullYear()} 
           style={{ color: '#D0DEDF' , fontWeight: 'bold'}} 
         />
       </div>

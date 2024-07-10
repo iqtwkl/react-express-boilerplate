@@ -2,11 +2,13 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     ManyToMany,
 } from "typeorm";
 
+import { Profile } from "./Profile";
 import { Group } from "./Group";
 import { Dashboard } from "./Dashboard";
   
@@ -35,4 +37,7 @@ export class Account {
   
     @UpdateDateColumn()
     updated_at: Date;
+
+    @OneToOne(() => Profile, profile => profile.account, { onDelete: 'CASCADE' })
+    profile: Profile;
 }

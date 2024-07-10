@@ -6,3 +6,10 @@ export interface AccountInterface {
     created_at: Date;
     updated_at: Date;
 }
+
+export interface AccountSessionInterface {
+    id: string;
+    username: string;
+    fullName: string;
+    email: string;
+}
