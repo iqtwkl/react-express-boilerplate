@@ -1,15 +1,14 @@
-import axios from "axios";
+import { AccountInterface } from "../../components/entity/account";
+import { AuthorizedAPIRequest } from ".";
 
 const env = import.meta.env;
 
-export interface AccountInterface {
-    username: string;
-    email: string;
-    password: string;
-}
-
-export class AccountAPI {
+export class AccountAPI extends AuthorizedAPIRequest{
     URL:string = `${env.VITE_API_URL}/accounts`;
+
+    constructor(token: string) {
+        super(token);
+    }
 
     async getAll(
         page = 1, 
@@ -18,7 +17,7 @@ export class AccountAPI {
         search_by = "", 
         sort_by = "", 
         descending = undefined
-    ) {
+    ): Promise<AccountInterface[]> {
         let url = `${this.URL}/?page=${page}&per_page=${per_page}`;
         
         if (search != "") {
@@ -34,50 +33,35 @@ export class AccountAPI {
             url = `${url}&descending=${descending}`;
         }
 
-        const response = await axios.get(url);
-        if (response.status != 200) {
-            throw Error(`${response.status} : ${response.statusText}`)
-        }
+        const response = await this.makeRequest(url, 'get');
         return response.data;
     }
 
-    async getById(id:number) {
+    async getById(id: string): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
 
-        const response = await axios.get(url);
-        if (response.status != 200) {
-            throw Error(`${response.status} : ${response.statusText}`)
-        }
+        const response = await this.makeRequest(url, 'get');
         return response.data;
     }
 
-    async delete(id:number) {
+    async delete(id: string): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
-
-        const response = await axios.delete(url);
-        if (response.status != 200) {
-            throw Error(`${response.status} : ${response.statusText}`)
-        }
-        return response.data;
+        
+        const response = await this.makeRequest(url, 'delete');
+        return response.data;        
     }
 
-    async create(account: AccountInterface) {
+    async create(account: AccountInterface): Promise<AccountInterface> {
         let url = `${this.URL}/`;
 
-        const response = await axios.post(url, account);
-        if (response.status != 200) {
-            throw Error(`${response.status} : ${response.statusText}`)
-        }
+        const response = await this.makeRequest(url, 'post', account);
         return response.data;
     }
 
-    async update(id: number, account: AccountInterface) {
+    async update(id: string, account: AccountInterface): Promise<AccountInterface> {
         let url = `${this.URL}/${id}`;
 
-        const response = await axios.put(url, account);
-        if (response.status != 200) {
-            throw Error(`${response.status} : ${response.statusText}`)
-        }
+        const response = await this.makeRequest(url, 'put', account);
         return response.data;
     }
     

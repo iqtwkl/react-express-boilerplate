@@ -20,7 +20,6 @@ export class AuthController {
         */
         try {
             const { username, password } = req.body;
-    
             const accountService = new AccountService();
             const account = await accountService.findByUsername(username);
         
@@ -34,15 +33,19 @@ export class AuthController {
                 return res.status(401).json({ status: false, error: "Invalid credentials" });
             }
             // generate token
-            const token = encrypt.generateToken({ id: account.id });
-    
+            const token = encrypt.generateToken({
+                id: account.id, 
+                username: account.username, 
+                email: account.email, 
+                fullName: account.profile ? account.profile.fullName : null
+            });
+
             res.status(200).json({
                 success: true,
                 token: token,
-                // refresh: 'sometoken'
             });
         } catch(error) {
-            res.status(500).json({"error": error});
+            res.status(500).json({"error": error.message})
         }
         /* #swagger.responses[200] = {
                 description: "",

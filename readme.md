@@ -48,3 +48,8 @@ setting database at file
 ```
 app/src/configs/db.config.ts
 ```
+
+### initial seed
+```
+yarn run db:seed
+```
