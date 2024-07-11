@@ -147,7 +147,7 @@ const doc = {
             ],
             kibanaSchema: {
                 id: "uuid-hash",
-                username: "unique-username",
+                username: "username",
                 connection_name: "unique-name",
                 password: "somepassword",
                 create_at: 'yyyy-mm-dd',
@@ -156,7 +156,7 @@ const doc = {
             listKibanaSchema: [
                 {
                     id: "uuid-hash",
-                    username: "unique-username",
+                    username: "username",
                     connection_name: "unique-name",
                     password: "somepassword",
                     create_at: 'yyyy-mm-dd',
@@ -164,13 +164,39 @@ const doc = {
                 }
             ],
             kibanaInSchema: {
-                username: "unique-username",
+                username: "username",
                 connection_name: "unique-name",
                 password: "somepassword",
             },
+            elasticSchema: {
+                id: "uuid-hash",
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                index: "index-name",
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listElasticSchema: [
+                {
+                    id: "uuid-hash",
+                    username: "username",
+                    connection_name: "unique-name",
+                    password: "somepassword",
+                    index: "index-name",
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            elasticInSchema: {
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                index: "index-name",
+            },
             logstashSchema: {
                 id: 'uuid-hash',
-                username: 'unique-name',
+                username: 'username',
                 connection_name: 'host-ip',
                 password: 'ssh-username',
                 ip: 'ssh-password',
@@ -185,10 +211,10 @@ const doc = {
             listLogstashSchema: [
                 {
                     id: 'uuid-hash',
-                    username: 'unique-name',
-                    connection_name: 'host-ip',
-                    password: 'ssh-username',
-                    ip: 'ssh-password',
+                    username: 'ssh-username',
+                    connection_name: 'unique-name',
+                    password: 'ssh-password',
+                    ip: 'host-ip',
                     directory: 'remote-path',
                     input_path: 'input-path',
                     grok_pattern: 'grok-pattern',

@@ -7,6 +7,7 @@ import { Client, ScpClient } from 'node-scp';
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
+import { ElasticConnection } from "../models/ElasticConnection";
 
 export class LogstashSettingService implements LogstashSettingRepositoryInterface {
     async scpConnect(ip: string, username: string, password: string): Promise<ScpClient> {
@@ -19,15 +20,17 @@ export class LogstashSettingService implements LogstashSettingRepositoryInterfac
     }
     async save(scpClient: ScpClient, directory: string, connection_name: string, body: object): Promise<void> {
         const templatePath = path.resolve(__dirname, '../logstash.conf.ejs');
-        const outputPath = path.resolve(__dirname, `../temp/${connection_name}/logstash.conf`);
+        const outputPath = path.resolve(__dirname, `../temp/${connection_name}.conf`);
+        const remotePath = `${directory}/${connection_name}.conf`;
         const template = fs.readFileSync(templatePath, 'utf-8');
         const logstashConfig = ejs.render(template, body);
+        
 
-        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+        //fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
         fs.writeFileSync(outputPath, logstashConfig, 'utf-8');
     
-        await scpClient.uploadFile(outputPath, directory);
+        await scpClient.uploadFile(outputPath, remotePath);
         scpClient.close();
     }
     async retry(id: string): Promise<{ logstashSetting: LogstashSettingInterface, configData: any }> {

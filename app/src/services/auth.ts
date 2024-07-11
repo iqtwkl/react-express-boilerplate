@@ -21,7 +21,12 @@ export class AuthService implements AuthRepositoryInterface {
             throw new Error("User not found");
         }
 
-        const token = encrypt.generateToken({ id: account.id });
+        const token = encrypt.generateToken({
+            id: account.id, 
+            username: account.username, 
+            email: account.email, 
+            fullName: account.profile ? account.profile.fullName : null
+        });
         const resetUrl = `${BASE_URL}/reset_password?token=${token}`
 
         const transporter = nodemailer.createTransport({
