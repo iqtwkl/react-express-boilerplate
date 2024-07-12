@@ -4,12 +4,18 @@ import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
 import ErrorModalComponent from "../../components/common/error";
+import { HiOutlineUser,HiOutlineKey } from 'react-icons/hi';
+import { SVGProps } from 'react';
 
 interface LoginFormProps {
     setShowCreateAccount: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
+const UserIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <HiOutlineUser {...props} style={{ color: '#629093', strokeWidth: 1 }} />;
+const KeyIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <HiOutlineKey {...props} style={{ color: '#629093', strokeWidth: 1 }} />;
+
+export function LoginForm({ setShowCreateAccount, setShowForgotPassword }: LoginFormProps) {
     const navigate = useNavigate();
     const { isLoggedIn, setLoggedIn, token, setToken } = useAuth();
     const [isError, setIsError] = useState(false);
@@ -52,6 +58,10 @@ export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
         setShowCreateAccount(true);
     };
 
+    const handleForgotPasswordClick = () => {
+        setShowForgotPassword(true);
+    };
+
     return (
         <>
             <div className="flex items-center justify-center mb-6">
@@ -60,7 +70,7 @@ export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
                     MASIFLog
                 </h6>
             </div>
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                 <div className="relative">
                     <TextInput
                         id="username"
@@ -71,13 +81,10 @@ export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
                         onChange={handleInputChange}
                         required
                         className="text-sm"
+                        icon={UserIcon}
                         style={{
                             border: '1px solid #629093',
-                            backgroundImage: 'url("/user-primary.png")',
-                            backgroundSize: '16px 16px',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: '8px center',
-                            paddingLeft: '32px',
+                            paddingLeft: '36px',
                             backgroundColor: 'transparent',
                         }}
                     />
@@ -90,23 +97,20 @@ export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
                         placeholder="Password"
                         value={data.password}
                         onChange={handleInputChange}
+                        icon={KeyIcon}
                         required
                         style={{
                             border: '1px solid #629093',
-                            backgroundImage: 'url("/key-primary.png")',
-                            backgroundSize: '16px 16px',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: '8px center',
-                            paddingLeft: '32px',
+                            paddingLeft: '36px',
                             backgroundColor: 'transparent',
                         }}
                     />
                 </div>
                 <div className="flex items-center justify-end">
                     <Label
-                        htmlFor="forgotpwd"
                         className="text-xs cursor-pointer underline"
                         style={{ textDecorationColor: '#629093', color: '#629093', }}
+                        onClick={handleForgotPasswordClick}
                     >
                         Forgot Password?
                     </Label>
@@ -122,7 +126,7 @@ export function LoginForm({ setShowCreateAccount }: LoginFormProps) {
                             color: '#fff',
                             border: '1px solid #629093',
                             borderRadius: '20px',
-                            marginTop: '40px'
+                            marginTop: '40px',
                         }}
                     >
                         Log In
