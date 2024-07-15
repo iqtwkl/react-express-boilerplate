@@ -13,7 +13,7 @@ export class ApplicationError extends Error {
 }
 
 interface ErrorProps {
-  error: ApplicationError,
+  error: ApplicationError | null,
   isError: boolean,
   setIsError: (isError: boolean) => void,  
 }
@@ -24,7 +24,7 @@ export default function ErrorModalComponent(props: ErrorProps) {
 
   const handleButtonClick = () => {
     setIsError(false);
-    if (error.status == 401) {
+    if (error?.status == 401) {
       logout();
     }
   }

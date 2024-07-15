@@ -3,7 +3,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
-import ErrorModalComponent from "../../components/common/error";
+import ErrorModalComponent, { ApplicationError } from "../../components/common/error";
 import { HiOutlineUser,HiOutlineKey } from 'react-icons/hi';
 import { SVGProps } from 'react';
 
@@ -19,7 +19,7 @@ export function LoginForm({ setShowCreateAccount, setShowForgotPassword }: Login
     const navigate = useNavigate();
     const { isLoggedIn, setLoggedIn, token, setToken } = useAuth();
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState<ApplicationError | null>(null);
 
     const [data, setData] = useState({
         username: '',

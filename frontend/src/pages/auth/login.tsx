@@ -1,49 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Button, Label, TextInput } from "flowbite-react";
-import { AuthAPI } from '../../services/api/auth';
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
-import ErrorModalComponent, { ApplicationError } from "../../components/common/error";
-import { AxiosError } from "axios";
 import CreateAccount from "./signup";
 import ForgotPassword from "./forgot_password";
 import { LoginForm } from "./login_form";
 
 export function LoginPage() {
     const navigate = useNavigate();
-    const { isLoggedIn, setLoggedIn, token, setToken, setUserFromToken } = useAuth(); 
-    const [isError, setIsError] = useState(false);
-    const [error, setError] = useState<ApplicationError>(Object);
+    const { isLoggedIn, token } = useAuth(); 
     const [showCreateAccount, setShowCreateAccount] = useState(false);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
-
-    const [data, setData] = useState({
-        username: '',
-        password: ''
-    });
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setData({
-            ...data,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        
-        try {
-            const api = new AuthAPI();
-            const response = await api.login(data.username, data.password);
-            setToken(response.token);
-            setLoggedIn(response.success);
-            setUserFromToken(response.token);
-        } catch(error: AxiosError | any) {
-            setError(new ApplicationError(error.response.status, error.response.statusText));
-            setIsError(true);
-        }       
-    };
 
     useEffect(() => {
         if (isLoggedIn && token) {
@@ -51,10 +17,6 @@ export function LoginPage() {
         }
     }, [isLoggedIn, token, navigate]);
 
-    const handleCreateAccountClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
-        setShowCreateAccount(true);
-    };
 
     useEffect(() => {
         console.log(showCreateAccount);

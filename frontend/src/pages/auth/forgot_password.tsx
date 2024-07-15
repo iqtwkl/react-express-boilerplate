@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
 import { HiMail} from 'react-icons/hi';
 
 interface ForgotPasswordProps {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import PageTitleComponent from '../../components/common/pageTitle';
 import FooterComponent from '../../components/common/footer/footer';

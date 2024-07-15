@@ -15,7 +15,7 @@ export function ConnectionPage() {
     
     const [selectedButton, setSelectedButton] = useState('elasticPanel');
 
-    const handleButtonClick = (button) => {
+    const handleButtonClick = (button: string) => {
         setSelectedButton(button);
     }
 

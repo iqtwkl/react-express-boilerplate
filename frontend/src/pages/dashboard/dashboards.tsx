@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const DashboardCards = () => {
     const dashboardIds = ["A", "B", "C"];
