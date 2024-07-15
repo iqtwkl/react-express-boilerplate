@@ -70,6 +70,58 @@
         }
       }
     },
+    "/auth/request_reset_password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestResetPasswordInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset_password": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resetPasswordInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
     "/accounts/": {
       "get": {
         "tags": [
@@ -1004,6 +1056,13 @@
         "description": "",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -1057,6 +1116,9 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1082,6 +1144,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1094,6 +1163,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1118,6 +1190,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1130,6 +1209,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1164,11 +1246,21 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1195,6 +1287,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1207,6 +1306,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1225,6 +1327,15 @@
           "Dashboard"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1238,6 +1349,9 @@
           },
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1254,6 +1368,1032 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/dashboardInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kibana_connections": {
+      "get": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listKibanaSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/kibana_connection/{id}": {
+      "get": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kibanaSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kibanaSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/kibanaInSchema"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/kibana_connection/name/{connection_name}": {
+      "get": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "connection_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kibanaSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/kibana_connection": {
+      "post": {
+        "tags": [
+          "Kibana"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kibanaSchema"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/kibanaInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logstash_settings": {
+      "get": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listLogstashSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/logstash_setting/{id}": {
+      "get": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logstashSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logstashSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/logstashInSchema"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/logstash_setting/name/{connection_name}": {
+      "get": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "connection_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logstashSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/logstash_setting": {
+      "post": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logstashSchema"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/logstashInSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retry/{id}": {
+      "post": {
+        "tags": [
+          "Logstash"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logstashSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/elastic_connections": {
+      "get": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listElasticSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/elastic_connection/{id}": {
+      "get": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/elasticSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/elasticSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/elasticInSchema"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/elastic_connection/name/{connection_name}": {
+      "get": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "connection_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/elasticSchema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/elastic_connection": {
+      "post": {
+        "tags": [
+          "Elasticsearch"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/elasticSchema"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/elasticInSchema"
               }
             }
           }
@@ -1303,6 +2443,28 @@
           }
         }
       },
+      "requestResetPasswordInSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "mail@email.com"
+          }
+        }
+      },
+      "resetPasswordInSchema": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "token"
+          },
+          "newPassword": {
+            "type": "string",
+            "example": "somepassword"
+          }
+        }
+      },
       "accountSchema": {
         "type": "object",
         "properties": {
@@ -1342,6 +2504,10 @@
           "email": {
             "type": "string",
             "example": "mail@email.com"
+          },
+          "is_admin": {
+            "type": "number",
+            "example": 0
           }
         }
       },
@@ -1619,6 +2785,324 @@
               "type": "string",
               "example": "yyyy-mm-dd"
             }
+          }
+        }
+      },
+      "kibanaSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid-hash"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "connection_name": {
+            "type": "string",
+            "example": "unique-name"
+          },
+          "password": {
+            "type": "string",
+            "example": "somepassword"
+          },
+          "create_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          },
+          "update_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          }
+        }
+      },
+      "listKibanaSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "uuid-hash"
+            },
+            "username": {
+              "type": "string",
+              "example": "username"
+            },
+            "connection_name": {
+              "type": "string",
+              "example": "unique-name"
+            },
+            "password": {
+              "type": "string",
+              "example": "somepassword"
+            },
+            "create_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            },
+            "update_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            }
+          }
+        }
+      },
+      "kibanaInSchema": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "connection_name": {
+            "type": "string",
+            "example": "unique-name"
+          },
+          "password": {
+            "type": "string",
+            "example": "somepassword"
+          }
+        }
+      },
+      "elasticSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid-hash"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "connection_name": {
+            "type": "string",
+            "example": "unique-name"
+          },
+          "password": {
+            "type": "string",
+            "example": "somepassword"
+          },
+          "index": {
+            "type": "string",
+            "example": "index-name"
+          },
+          "create_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          },
+          "update_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          }
+        }
+      },
+      "listElasticSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "uuid-hash"
+            },
+            "username": {
+              "type": "string",
+              "example": "username"
+            },
+            "connection_name": {
+              "type": "string",
+              "example": "unique-name"
+            },
+            "password": {
+              "type": "string",
+              "example": "somepassword"
+            },
+            "index": {
+              "type": "string",
+              "example": "index-name"
+            },
+            "create_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            },
+            "update_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            }
+          }
+        }
+      },
+      "elasticInSchema": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "connection_name": {
+            "type": "string",
+            "example": "unique-name"
+          },
+          "password": {
+            "type": "string",
+            "example": "somepassword"
+          },
+          "index": {
+            "type": "string",
+            "example": "index-name"
+          }
+        }
+      },
+      "logstashSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid-hash"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "connection_name": {
+            "type": "string",
+            "example": "host-ip"
+          },
+          "password": {
+            "type": "string",
+            "example": "ssh-username"
+          },
+          "ip": {
+            "type": "string",
+            "example": "ssh-password"
+          },
+          "directory": {
+            "type": "string",
+            "example": "remote-path"
+          },
+          "input_path": {
+            "type": "string",
+            "example": "input-path"
+          },
+          "grok_pattern": {
+            "type": "string",
+            "example": "grok-pattern"
+          },
+          "elasticsearch_host": {
+            "type": "string",
+            "example": "elasticsearch-host"
+          },
+          "index_name": {
+            "type": "string",
+            "example": "index-name"
+          },
+          "create_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          },
+          "update_at": {
+            "type": "string",
+            "example": "yyyy-mm-dd"
+          }
+        }
+      },
+      "listLogstashSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "uuid-hash"
+            },
+            "username": {
+              "type": "string",
+              "example": "ssh-username"
+            },
+            "connection_name": {
+              "type": "string",
+              "example": "unique-name"
+            },
+            "password": {
+              "type": "string",
+              "example": "ssh-password"
+            },
+            "ip": {
+              "type": "string",
+              "example": "host-ip"
+            },
+            "directory": {
+              "type": "string",
+              "example": "remote-path"
+            },
+            "input_path": {
+              "type": "string",
+              "example": "input-path"
+            },
+            "grok_pattern": {
+              "type": "string",
+              "example": "grok-pattern"
+            },
+            "elasticsearch_host": {
+              "type": "string",
+              "example": "elasticsearch-host"
+            },
+            "index_name": {
+              "type": "string",
+              "example": "index-name"
+            },
+            "create_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            },
+            "update_at": {
+              "type": "string",
+              "example": "yyyy-mm-dd"
+            }
+          }
+        }
+      },
+      "logstashInSchema": {
+        "type": "object",
+        "properties": {
+          "connection_name": {
+            "type": "string",
+            "example": "unique-name"
+          },
+          "ip": {
+            "type": "string",
+            "example": "host-ip"
+          },
+          "username": {
+            "type": "string",
+            "example": "ssh-username"
+          },
+          "password": {
+            "type": "string",
+            "example": "ssh-password"
+          },
+          "directory": {
+            "type": "string",
+            "example": "remote-path"
+          },
+          "input_path": {
+            "type": "string",
+            "example": "input-path"
+          },
+          "grok_pattern": {
+            "type": "string",
+            "example": "grok-pattern"
+          },
+          "elasticsearch_host": {
+            "type": "string",
+            "example": "elasticsearch-host"
+          },
+          "index_name": {
+            "type": "string",
+            "example": "index-name"
           }
         }
       }

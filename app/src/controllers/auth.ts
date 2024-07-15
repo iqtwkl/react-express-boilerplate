@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AccountService } from '../services/account';
+import { AuthService } from '../services/auth';
 import bcrypt from "bcrypt";
 import { encrypt } from "../utils/encriptor";
 
@@ -19,7 +20,6 @@ export class AuthController {
         */
         try {
             const { username, password } = req.body;
-
             const accountService = new AccountService();
             const account = await accountService.findByUsername(username);
         
@@ -58,5 +58,55 @@ export class AuthController {
                 }
             }   
         */
+    }
+    static async requestResetPassowrd(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/components/schemas/requestResetPasswordInSchema"
+                        }  
+                    }
+                }
+            }
+            #swagger.tags = ['Auth'] 
+        */
+        try {
+            const { email } = req.body;
+
+            const authService = new AuthService();
+
+            await authService.requestResetPassword(email);
+            
+            res.status(200).json({"message": "Email sent successfully"})
+        } catch (error) {
+            res.status(500).json({"error": error});
+        }
+    }
+    static async resetPassword(req: Request, res: Response) {
+        /*  #swagger.requestBody = {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/components/schemas/resetPasswordInSchema"
+                        }  
+                    }
+                }
+            }
+            #swagger.tags = ['Auth'] 
+        */
+       try {
+            const { token, newPassword } = req.body;
+
+            const authService = new AuthService();
+
+            await authService.resetPassword(token, newPassword);
+            
+            res.status(200).json({"message": "Password reset successfully"})
+        } catch (error) {
+            res.status(500).json({"error": error});
+        }
     }
 }

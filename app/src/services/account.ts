@@ -34,6 +34,7 @@ export class AccountService implements AccountRepositoryInterface {
         newAccount.id = uuidv4();
         newAccount.username = account.username;
         newAccount.email = account.email;
+        newAccount.is_admin = account.is_admin;
         newAccount.password = hashPassword;
         newAccount.is_admin = account.is_admin;
 
@@ -72,6 +73,7 @@ export class AccountService implements AccountRepositoryInterface {
         }
         accountToUpdate.username = account.username;
         accountToUpdate.email = account.email;
+        accountToUpdate.is_admin = account.is_admin;
         accountToUpdate.password = account.password;
         await accountRepository.save(accountToUpdate);
 
