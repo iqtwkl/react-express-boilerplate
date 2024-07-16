@@ -6,22 +6,28 @@ import { AuthProvider } from './hooks/AuthContext';
 import { AccountIndexPage } from './pages/account';
 import { RoleIndexPage } from './pages/role';
 import { ProfilePage } from './pages/account/profile';
+import { DashboardDetailPage } from './pages/dashboard/detail';
 import { ErrorNotFoundPage } from './pages/404';
+import { ConnectionPage } from './pages/connection';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/auth/login" element={<LoginPage/>} />
-          <Route path="/account" element={<AccountIndexPage/>} />
-          <Route path="/account/profile" element={<ProfilePage/>} />
-          <Route path="/role" element={<RoleIndexPage/>} />
-          <Route path="*" element={<ErrorNotFoundPage/>} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/auth/login" element={<LoginPage/>} />
+            <Route path="/account" element={<AccountIndexPage/>} />
+            <Route path="/account/profile" element={<ProfilePage/>} />
+            <Route path="/role" element={<RoleIndexPage/>} />
+            <Route path="/dashboard/:id" element={<DashboardDetailPage/>} />
+            <Route path="/connection" element={<ConnectionPage/>} />
+            <Route path="*" element={<ErrorNotFoundPage/>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </>
   )
 }
 

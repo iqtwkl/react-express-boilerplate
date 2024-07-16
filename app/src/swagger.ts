@@ -43,6 +43,13 @@ const doc = {
                 token: 'token',
                 refresh: 'refresh-token',
             },
+            requestResetPasswordInSchema: {
+                email: 'mail@email.com'
+            },
+            resetPasswordInSchema: {
+                token: 'token',
+                newPassword: 'somepassword'
+            },
             accountSchema: {
                 id: 'uuid-hash',
                 username: 'unique-username',
@@ -54,6 +61,7 @@ const doc = {
                 username: 'unique-username',
                 password: 'somepassword',
                 email: 'mail@email.com',
+                is_admin: 0,
             },
             listAccountSchema: [
                 {
@@ -68,6 +76,171 @@ const doc = {
             profileInSchema: {
                 fullName: 'John Doe',
                 bio: 'I am Human',
+            groupSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            groupInSchema: {
+                name: 'unique-name',
+            },
+            groupAccountsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                accounts: [
+                    {
+                        id: 'uuid-hash',
+                        username: 'unique-username',
+                        email: 'mail@email.com',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                    }
+                ],
+            },
+            groupAccountsInSchema: {
+                accountId: 'uuid-hash',
+            },
+            groupDashboardsSchema: {
+                id: 'uuid-hash',
+                name: 'unique-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+                dashboards: [
+                    {
+                        id: 'uuid-hash',
+                        name: 'unique-name',
+                        create_at: 'yyyy-mm-dd',
+                        update_at: 'yyyy-mm-dd',
+                        kibanaId: 'uuid-hash',
+                    }
+                ],
+            },
+            groupDashboardsInSchema: {
+                dashboardId: 'uuid-hash',
+            },
+            listGroupSchema: [
+                {
+                    id: 'uuid-hash',
+                    name: 'unique-name',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            dashboardSchema: {
+                id: 'uuid-hash',
+                title: 'unique-name',
+                url: 'dashboard-url',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            dashboardInSchema: {
+                dashboard: {
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                },
+                kibana_id: 'uuid-hash'
+            },
+            listDashboardSchema: [
+                {
+                    id: 'uuid-hash',
+                    title: 'unique-name',
+                    url: 'dashboard-url',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            kibanaSchema: {
+                id: "uuid-hash",
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listKibanaSchema: [
+                {
+                    id: "uuid-hash",
+                    username: "username",
+                    connection_name: "unique-name",
+                    password: "somepassword",
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            kibanaInSchema: {
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+            },
+            elasticSchema: {
+                id: "uuid-hash",
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                index: "index-name",
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listElasticSchema: [
+                {
+                    id: "uuid-hash",
+                    username: "username",
+                    connection_name: "unique-name",
+                    password: "somepassword",
+                    index: "index-name",
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            elasticInSchema: {
+                username: "username",
+                connection_name: "unique-name",
+                password: "somepassword",
+                index: "index-name",
+            },
+            logstashSchema: {
+                id: 'uuid-hash',
+                username: 'username',
+                connection_name: 'host-ip',
+                password: 'ssh-username',
+                ip: 'ssh-password',
+                directory: 'remote-path',
+                input_path: 'input-path',
+                grok_pattern: 'grok-pattern',
+                elasticsearch_host: 'elasticsearch-host',
+                index_name: 'index-name',
+                create_at: 'yyyy-mm-dd',
+                update_at: 'yyyy-mm-dd',
+            },
+            listLogstashSchema: [
+                {
+                    id: 'uuid-hash',
+                    username: 'ssh-username',
+                    connection_name: 'unique-name',
+                    password: 'ssh-password',
+                    ip: 'host-ip',
+                    directory: 'remote-path',
+                    input_path: 'input-path',
+                    grok_pattern: 'grok-pattern',
+                    elasticsearch_host: 'elasticsearch-host',
+                    index_name: 'index-name',
+                    create_at: 'yyyy-mm-dd',
+                    update_at: 'yyyy-mm-dd',
+                }
+            ],
+            logstashInSchema: {
+                connection_name: 'unique-name',
+                ip: 'host-ip',
+                username: 'ssh-username',
+                password: 'ssh-password',
+                directory: 'remote-path',
+                input_path: 'input-path',
+                grok_pattern: 'grok-pattern',
+                elasticsearch_host: 'elasticsearch-host',
+                index_name: 'index-name'
             }
         }
     }

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import RootLayout from '../../components/layouts/layout';
 import { ApplicationError } from '../../components/common/error';
+import RootLayout from '../../components/layouts/layout';
 
 export function RoleIndexPage() {
-    const [isError, setIsError] = useState(false);
-    const [error] = useState<ApplicationError>(Object);
     const breadcrumbList = [
         { href: '', name: 'Role' },
     ];
+    const [isError, setIsError] = useState(false);
+    const [error] = useState<ApplicationError | null>(null);
 
     return (
         <>

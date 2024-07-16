@@ -1,0 +1,28 @@
+input {
+    file {
+      path => "<%= inputPath %>"
+      start_position => "beginning"
+      sincedb_path => "/dev/null"
+      type => "<%= logType %>"
+    }
+}
+
+filter {
+  if [type] == "<%= logType %>" {
+    grok {
+      match => { "message" => "<%= grokPattern %>" }
+    }
+  }
+} 
+  
+output {
+  if [type] == "<%= logType %>" {
+    stdout {
+      codec => rubydebug
+    }
+    elasticsearch {
+      hosts => ["<%= elasticsearchHost %>"]
+      index => "<%= indexName %>"
+    }
+  }
+}

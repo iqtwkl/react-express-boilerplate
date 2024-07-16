@@ -12,7 +12,7 @@ import { ApplicationError } from '../../components/common/error';
 
 export function AccountIndexPage() {
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState<ApplicationError>(Object);
+    const [error, setError] = useState<ApplicationError | null>(null);
     const [loading, setLoading] = useState(true);
     const [accounts, setAccounts] = useState<AccountInterface[]>([]);
     const { token } = useAuth();
@@ -137,8 +137,8 @@ export function AccountIndexPage() {
     }, []);
 
     const columnConfig = [
-        { header: 'User Name', accessor: 'username' },
-        { header: 'Email', accessor: 'email' },
+        { header: 'User Name', accessor: 'username', asIs: false },
+        { header: 'Email', accessor: 'email', asIs: false },
         { header: '', body: crudAction, asIs: true } 
     ];
 

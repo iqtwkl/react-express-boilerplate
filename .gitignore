@@ -13,6 +13,7 @@ dist-ssr
 *.local
 data
 .env
+build/
 
 # Editor directories and files
 .vscode/*
@@ -26,3 +27,4 @@ data
 *.sw?
 
 app/src/uploads
+server.config.js

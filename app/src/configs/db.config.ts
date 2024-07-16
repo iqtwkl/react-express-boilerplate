@@ -2,7 +2,12 @@ import dotenv from 'dotenv';
 import { DataSource } from "typeorm";
 import { Account } from '../models/Account';
 import { Profile } from '../models/Profile';
-
+import { Dashboard } from "../models/Dashboard";
+import { Group } from "../models/Group";
+import { KibanaConnection } from '../models/KibanaConnection';
+import { ElasticConnection } from "../models/ElasticConnection";
+import { LogstashSetting } from "../models/LogstashSetting";
+ 
 dotenv.config();
 
 const env = process.env;
@@ -10,7 +15,7 @@ const env = process.env;
 export const dbDataSource = new DataSource({
   type: "sqlite",
   database: `./data/datasource.sqlite3`,
-  entities: [ Account, Profile ],
+  entities: [ Account, Profile, Dashboard, Group, KibanaConnection, ElasticConnection, LogstashSetting ],
   logging: true,
   synchronize: true,
 });

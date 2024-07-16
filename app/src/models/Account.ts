@@ -5,8 +5,12 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
+    ManyToMany,
 } from "typeorm";
+
 import { Profile } from "./Profile";
+import { Group } from "./Group";
+import { Dashboard } from "./Dashboard";
   
 @Entity()
 export class Account {
@@ -21,6 +25,12 @@ export class Account {
   
     @Column()
     password: string;
+
+    @Column()
+    is_admin: number;
+
+    @ManyToMany(() => Group, (group) => group.accounts)
+    groups: Group[];
   
     @CreateDateColumn()
     created_at: Date;
