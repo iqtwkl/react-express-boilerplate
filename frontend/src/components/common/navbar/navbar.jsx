@@ -32,7 +32,7 @@ const NavbarComponent = () => {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">{loggedUser.fullName}</span>
+            <span className="block text-sm">{loggedUser.fullName ? loggedUser.fullName : loggedUser.username }</span>
             <span className="block truncate text-sm font-medium">{loggedUser.email}</span>
           </Dropdown.Header>
           <Dropdown.Item href='/'>Dashboard</Dropdown.Item>
