@@ -564,10 +564,6 @@
           "bio": {
             "type": "string",
             "example": "I am Human"
-          },
-          "avatarUrl": {
-            "type": "string",
-            "example": "/default-user.png"
           }
         }
       }

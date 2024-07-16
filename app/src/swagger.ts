@@ -64,7 +64,6 @@ const doc = {
             profileInSchema: {
                 fullName: 'John Doe',
                 bio: 'I am Human',
-                avatarUrl: '/default-user.png'
             }
         }
     }

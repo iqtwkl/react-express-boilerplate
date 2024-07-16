@@ -238,7 +238,8 @@ export class AccountController {
         */
     }
     static async updateProfile(req: CustomRequest, res: Response) {
-        /*  #swagger.requestBody = {
+        /*  
+        #swagger.requestBody = {
             required: true,
             content: {
                 "application/json": {
@@ -251,7 +252,7 @@ export class AccountController {
         #swagger.security = [{
             "bearerAuth": []
         }]
-        #swagger.tags = ['Account']
+        #swagger.tags = ['Account'] 
         */
         try {
             const accountService =  new AccountService();
@@ -259,17 +260,17 @@ export class AccountController {
 
             // if account not found
             if (!selectedAccount) {
-                return res.status(404).json({"error": `account not found currentUser: ${req.currentUser}`})
+                return res.status(404).json({"error": `account not found`})
             }
 
             const account = await accountService.updateProfile(selectedAccount, req.body);
-            
+                
             //remove password from response
             delete account.password;
 
             res.status(200).json(account);
         } catch (error) {
-            res.status(500).json({ "error": `${error.message} currentUser: ${req.currentUser}` });
+            res.status(500).json({ "error": `${error.message}` });
         }
         /* #swagger.responses[200] = {
             description: "",

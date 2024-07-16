@@ -24,8 +24,8 @@ export function ProfilePage() {
         try {
             const response = await api.getProfile();
             setAccount(response);
-        } catch (error: any) {
-            setError(error);
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
             setIsError(true);
         } finally {
             setLoading(false);
@@ -34,6 +34,8 @@ export function ProfilePage() {
 
     useEffect(() => {
         getProfile();
+        console.log(`error ${isError}`);
+        console.log(`loading ${loading}`)
     }, []);
 
     return (
