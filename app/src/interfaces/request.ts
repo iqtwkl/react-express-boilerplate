@@ -3,6 +3,7 @@ import { Request } from "express";
 
 export interface CustomRequest extends Request {
   currentUser?: any;
+  file?: any;
 }
 
 export interface PaginationSortingSearchParameter {

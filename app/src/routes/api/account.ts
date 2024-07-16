@@ -9,5 +9,6 @@ accountRoutes.post(`/accounts/`, AuthMiddleware.isAuthenticated, AccountControll
 accountRoutes.get(`/accounts/profile`, AuthMiddleware.isAuthenticated, AccountController.profile);
 accountRoutes.get(`/accounts/:id`, AuthMiddleware.isAuthenticated, AccountController.findById);
 accountRoutes.put(`/accounts/profile`, AuthMiddleware.isAuthenticated, AccountController.updateProfile);
+accountRoutes.post(`/accounts/profile/avatar`, AuthMiddleware.isAuthenticated, AccountController.updateAvatar);
 accountRoutes.put(`/accounts/:id`, AuthMiddleware.isAuthenticated, AccountController.update);
 accountRoutes.delete(`/accounts/:id`, AuthMiddleware.isAuthenticated, AccountController.delete);

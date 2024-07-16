@@ -2,6 +2,7 @@ import { AccountService } from "../services/account";
 import { Request, Response } from "express";
 import { RequestUtils } from "../utils/request"
 import { CustomRequest } from "../interfaces/request";
+import path from 'path';
 
 
 export class AccountController {
@@ -279,6 +280,58 @@ export class AccountController {
                     schema:{
                         $ref: "#/components/schemas/accountSchema"
                     }
+                }           
+            }
+        }   
+        */
+    }
+
+    static async updateAvatar(req: CustomRequest, res: Response) {
+        /*  
+        #swagger.consumes = ['multipart/form-data'] 
+        #swagger.parameters['file'] = {
+            in: 'formData',
+            type: 'file',
+            required: true,
+            description: 'avatar file',
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.tags = ['Account'] 
+        */
+        try {
+            const accountService = new AccountService();
+            const selectedAccount = await accountService.findById(req.currentUser.id);
+
+            if (!selectedAccount) {
+                return res.status(404).json({ "error": "account not found" });
+            }
+
+            if (!req.file) {
+                return res.status(400).json({ message: 'No file selected' });
+            }
+    
+            const avatarPath = req.file.path;
+    
+            const updatedData = {
+                ...req.body,
+                avatarUrl: avatarPath ? path.resolve(avatarPath) : null 
+            };
+    
+            const account = await accountService.updateProfile(selectedAccount, updatedData);
+            
+            delete account.password;
+    
+            res.status(200).json(account);
+        } catch (error) {
+            res.status(500).json({ "error": `${error.message}` });
+        }
+        /* #swagger.responses[200] = {
+            description: "Successful operation",
+            content: {
+                "application/json": {
+                    schema: { $ref: "#/components/schemas/accountSchema" }
                 }           
             }
         }   
