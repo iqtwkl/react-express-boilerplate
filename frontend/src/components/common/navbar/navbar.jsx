@@ -49,7 +49,7 @@ const NavbarComponent = () => {
             <span className="block truncate text-sm font-medium">{loggedUser.email}</span>
           </Dropdown.Header>
           <Dropdown.Item href='/'>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item href='/account/profile'>Profile</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
         </Dropdown>

@@ -12,7 +12,7 @@ export class AuthorizedAPIRequest {
         } ;
     }
 
-    async makeRequest(url: string, method: 'get' | 'post' | 'put' | 'delete', data?: any): Promise<AxiosResponse> {
+    async makeRequest(url: string, method: 'get' | 'post' | 'put' | 'delete', data?: object): Promise<AxiosResponse> {
         try {
             let response;
             switch (method) {
@@ -32,7 +32,7 @@ export class AuthorizedAPIRequest {
                 throw new ApplicationError(500, 'Invalid method');
             }
             return response;
-        } catch (error: any) {
+        } catch (error) {
             if (error instanceof AxiosError) {
                 if (error.response) {
                     throw new ApplicationError(error.response.status, error.response.statusText);
@@ -40,8 +40,10 @@ export class AuthorizedAPIRequest {
                     throw new ApplicationError(400, error.message);
                 } 
                 throw new ApplicationError(500, error.message);
+            } else if (error instanceof Error) {
+                throw new ApplicationError(500, error.message);
             }
-            throw new ApplicationError(error.status, error.message);
+            throw new ApplicationError(500, 'something went wrong');
         }
     }
 }

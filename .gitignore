@@ -26,5 +26,5 @@ build/
 *.sln
 *.sw?
 
-
+app/src/uploads
 server.config.js

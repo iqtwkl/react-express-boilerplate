@@ -5,6 +5,7 @@ export interface AccountInterface {
     password: string;
     created_at: Date;
     updated_at: Date;
+    profile: ProfileInterface;
 }
 
 export interface AccountSessionInterface {
@@ -12,4 +13,13 @@ export interface AccountSessionInterface {
     username: string;
     fullName: string;
     email: string;
+}
+
+export interface ProfileInterface {
+    id: string;
+    fullName: string;
+    bio: string;
+    avatarUrl:string;
+    created_at: Date;
+    updated_at: Date;
 }
