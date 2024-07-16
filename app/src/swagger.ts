@@ -1,5 +1,9 @@
 
 import swaggerAutogen from 'swagger-autogen';
+import dotenv from "dotenv";
+
+dotenv.config();
+const { BASE_URL = "" } = process.env;
 
 const doc = {
     info: {
@@ -18,7 +22,7 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:8080/api/',
+            url: `${BASE_URL}/api/`,
             description: ''
         },
     ],
