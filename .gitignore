@@ -24,3 +24,5 @@ data
 *.njsproj
 *.sln
 *.sw?
+
+app/src/uploads

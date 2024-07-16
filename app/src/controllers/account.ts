@@ -1,6 +1,7 @@
 import { AccountService } from "../services/account";
 import { Request, Response } from "express";
 import { RequestUtils } from "../utils/request"
+import { CustomRequest } from "../interfaces/request";
 
 
 export class AccountController {
@@ -196,6 +197,82 @@ export class AccountController {
             "bearerAuth": []
         }]
         #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/accountSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async profile(req: CustomRequest, res: Response) {
+        try {
+          const accountService =  new AccountService();
+          const account = await accountService.findById(req.currentUser.id);
+          
+          //remove password from response
+          delete account.password;
+
+          res.status(200).json(account);
+        } catch (error) {
+          res.status(500).json({ "error": error.message });
+        }
+        /* 
+        #swagger.tags = ['Account']
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: "",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/accountSchema"
+                    }
+                }           
+            }
+        }   
+        */
+    }
+    static async updateProfile(req: CustomRequest, res: Response) {
+        /*  
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/profileInSchema"
+                    }  
+                }
+            }
+        } 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.tags = ['Account'] 
+        */
+        try {
+            const accountService =  new AccountService();
+            const selectedAccount = await accountService.findById(req.currentUser.id);
+
+            // if account not found
+            if (!selectedAccount) {
+                return res.status(404).json({"error": `account not found`})
+            }
+
+            const account = await accountService.updateProfile(selectedAccount, req.body);
+                
+            //remove password from response
+            delete account.password;
+
+            res.status(200).json(account);
+        } catch (error) {
+            res.status(500).json({ "error": `${error.message}` });
+        }
+        /* #swagger.responses[200] = {
             description: "",
             content: {
                 "application/json": {

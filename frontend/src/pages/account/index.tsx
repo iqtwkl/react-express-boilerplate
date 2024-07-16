@@ -136,10 +136,6 @@ export function AccountIndexPage() {
         getDataAccount();
     }, []);
 
-    useEffect(() => {
-        console.log(account);
-    }, [account]);
-
     const columnConfig = [
         { header: 'User Name', accessor: 'username' },
         { header: 'Email', accessor: 'email' },
