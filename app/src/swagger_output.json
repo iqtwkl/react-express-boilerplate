@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080/api/",
+      "url": "/api/",
       "description": ""
     }
   ],
@@ -2634,6 +2634,19 @@
           }
         }
       },
+      "profileInSchema": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "bio": {
+            "type": "string",
+            "example": "I am Human"
+          }
+        }
+      },
       "groupSchema": {
         "type": "object",
         "properties": {
@@ -3156,16 +3169,6 @@
           }
         }
       },
-      "profileInSchema": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "bio": {
-            "type": "string",
-            "example": "I am Human"
       "logstashInSchema": {
         "type": "object",
         "properties": {

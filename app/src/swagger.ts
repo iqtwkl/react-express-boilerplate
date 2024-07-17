@@ -76,6 +76,7 @@ const doc = {
             profileInSchema: {
                 fullName: 'John Doe',
                 bio: 'I am Human',
+            },
             groupSchema: {
                 id: 'uuid-hash',
                 name: 'unique-name',
