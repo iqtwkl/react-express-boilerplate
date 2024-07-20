@@ -35,7 +35,6 @@ const TableComponent = (props: ITableProps) => {
     return <p>No data available.</p>;
   }
 
-  console.log(data); 
   return (
     <div className="rounded-[15px] bg-[#D0DEDF] p-2" style={{boxShadow: 'inset 0 3px 4px rgba(0, 0, 0, 0.1)'}}>
         <div className="overflow-x-auto">

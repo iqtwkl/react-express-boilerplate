@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { AppStateContext } from './AppState.context';
+import { ApplicationError } from '../components/common/error';
 
 interface AppStateProviderProps {
     children: React.ReactNode;
 }
 
-export const ErrorProvider: React.FC<AppStateProviderProps> = ({ children }) => {
+export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState<Error>(
+    const [error, setError] = useState<ApplicationError>(
         {
             name:'NoError',
-            message:'OK'
+            message:'OK',
+            status: 200
         }
     );
-    const [loading, setLoading] = useState(true);
 
     return (
-        <AppStateContext.Provider value={{isError, setIsError, error, setError, loading, setLoading}}>
+        <AppStateContext.Provider value={{isError, setIsError, error, setError}}>
             {children}
         </AppStateContext.Provider>
     )

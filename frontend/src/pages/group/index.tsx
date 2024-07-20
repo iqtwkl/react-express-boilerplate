@@ -14,10 +14,10 @@ import {
 } from "react-icons/ai";
 import CrudTableComponent from '../../components/common/table/crud';
 import { CreateModal } from './modal';
+import { useAppState } from '../../hooks/AppState.hooks';
 
 export function GroupIndexPage() {
-    const [isError, setIsError] = useState(false);
-    const [error, setError] = useState<ApplicationError | null>(null);
+    const { setError, setIsError } = useAppState()
     const [loading, setLoading] = useState(true);
 
     const { token } = useAuth();
@@ -69,7 +69,6 @@ export function GroupIndexPage() {
     }, []);
 
     const crudAction = (group: GroupInterface) => {
-        console.log(group);
         return (
             <div className='flex justify-end'>
                 <Button pill outline className="mr-2" onClick={() => { }}>
@@ -83,7 +82,6 @@ export function GroupIndexPage() {
     };
 
     const otherAction = (group: GroupInterface) => {
-        console.log(group);
         return (
             <div className='flex justify-end'>
                 <Button pill outline className="mr-2" onClick={() => { }}>
@@ -105,7 +103,7 @@ export function GroupIndexPage() {
 
     return (
         <>
-            <RootLayout title='Groups' error={error} isError={isError} setIsError={setIsError}>
+            <RootLayout title='Groups'>
                 {
                     loading ? <LoadingComponent />
                         : <CrudTableComponent 

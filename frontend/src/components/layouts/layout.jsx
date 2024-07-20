@@ -5,16 +5,17 @@ import FooterComponent from '../common/footer/footer';
 import PageTitleComponent from '../common/pageTitle';
 import { useAuth } from '../../hooks/Auth.hooks';
 import { Navigate } from 'react-router-dom';
-import ErrorModalComponent from '../common/error';
+import ErrorModalComponent, { ErrorModalCtxComponent } from '../common/error';
 import DashboardCards from '../../pages/dashboard/dashboards';
 import DashboardComponent from '../../pages/dashboard/detail_components';
+import { useAppState } from '../../hooks/AppState.hooks';
 
 const RootLayout = (
     {children,
     title, 
-    error, 
-    isError, 
-    setIsError}
+    error = {},
+    isError = false, 
+    setIsError = (isError) => {}}
 ) => {
     const { isLoggedIn, token } = useAuth();
 
@@ -55,6 +56,7 @@ const RootLayout = (
                 </div>
             </div>
             <ErrorModalComponent error={error} isError={isError} setIsError={setIsError} />
+            <ErrorModalCtxComponent />
         </Flowbite>
     );
 }

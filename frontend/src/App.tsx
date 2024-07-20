@@ -9,10 +9,11 @@ import { ProfilePage } from './pages/account/profile';
 import { DashboardDetailPage } from './pages/dashboard/detail';
 import { ErrorNotFoundPage } from './pages/404';
 import { ConnectionPage } from './pages/connection';
+import { AppStateProvider } from './hooks/AppState.provider';
 
 function App() {
   return (
-    <>
+    <AppStateProvider>
       <AuthProvider>
         <BrowserRouter>
           <Routes>
@@ -27,7 +28,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-    </>
+    </AppStateProvider>
   )
 }
 
