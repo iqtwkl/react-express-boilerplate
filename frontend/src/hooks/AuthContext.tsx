@@ -1,13 +1,38 @@
-import React, { useEffect, useState } from 'react';
+/** @deprecated: this file is deprecated,  */
+
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AccountSessionInterface } from '../components/entity/account';
 import { jwtDecode } from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from './AuthContext.context';
 
 interface AuthProviderProps {
     children: React.ReactNode;
 }
 
+type AuthContextType = {
+    isLoggedIn: boolean;
+    setLoggedIn: (loggedIn: boolean) => void;
+    token: string;
+    setToken: (token: string) => void;
+    loggedUser: AccountSessionInterface;
+    setLoggedUser: (loggedUser: AccountSessionInterface) => void;
+    logout: () => void;
+    setUserFromToken: (token: string) => void;
+};
+
+/** @deprecated: please change reference to Auth.context.tsx */
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+/** @deprecated: please change reference to Auth.hooks.tsx */
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+};
+
+/** @deprecated: please change reference to Auth.provider.tsx */
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');

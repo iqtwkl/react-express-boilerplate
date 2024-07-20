@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/AuthContext.hooks';
+import { useAuth } from '../../hooks/Auth.hooks';
 import CreateAccount from "./signup";
 import ForgotPassword from "./forgot_password";
 import { LoginForm } from "./login_form";

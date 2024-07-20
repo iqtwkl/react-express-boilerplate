@@ -1,6 +1,6 @@
 import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from "react-icons/hi"
-import { useAuth } from '../../../hooks/AuthContext.hooks';
+import { useAuth } from '../../../hooks/Auth.hooks';
 
 export class ApplicationError extends Error {
   status: number;

@@ -4,7 +4,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { useEffect, useState } from 'react';
 import LoadingComponent from '../../components/common/loading';
 import { AccountAPI } from '../../services/api/account';
-import { useAuth } from '../../hooks/AuthContext.hooks';
+import { useAuth } from '../../hooks/Auth.hooks';
 import { AccountInterface } from '../../components/entity/account';
 import { CreateModal, DeleteModal, EditModal } from './modal';
 import CrudTableComponent from '../../components/common/table/crud';
@@ -22,10 +22,6 @@ export function AccountIndexPage() {
     const [ isSuccess, setIsSuccess ] = useState(false);
     const [ account, setAccount ] = useState<AccountInterface | undefined>(undefined);
     const api = new AccountAPI(token);
-
-    const breadcrumbList = [
-        { href: '', name: 'Account' },
-    ];
 
     const crudAction = (account: AccountInterface) => {
         return (
@@ -144,7 +140,7 @@ export function AccountIndexPage() {
 
     return (
         <>
-            <RootLayout breadcrumbList={breadcrumbList} title='Account' error={error} isError={isError} setIsError={setIsError}>
+            <RootLayout title='Account' error={error} isError={isError} setIsError={setIsError}>
                 {
                     loading ? <LoadingComponent/> 
                     : <CrudTableComponent 

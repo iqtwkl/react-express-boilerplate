@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { IndexPage } from './pages';
 import { LoginPage } from './pages/auth/login';
-import { AuthProvider } from './hooks/AuthContext.context';
+import { AuthProvider } from './hooks/Auth.provider';
 import { AccountIndexPage } from './pages/account';
 import { GroupIndexPage } from './pages/group';
 import { ProfilePage } from './pages/account/profile';

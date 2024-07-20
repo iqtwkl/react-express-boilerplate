@@ -3,7 +3,7 @@ import { ApplicationError } from '../../components/common/error';
 import RootLayout from '../../components/layouts/layout';
 import LoadingComponent from '../../components/common/loading';
 import { GroupAPI } from '../../services/api/group';
-import { useAuth } from '../../hooks/AuthContext.hooks';
+import { useAuth } from '../../hooks/Auth.hooks';
 import { GroupInterface } from '../../components/entity/group';
 import { Button } from 'flowbite-react';
 import { 
@@ -16,9 +16,6 @@ import CrudTableComponent from '../../components/common/table/crud';
 import { CreateModal } from './modal';
 
 export function GroupIndexPage() {
-    const breadcrumbList = [
-        { href: '', name: 'Group' },
-    ];
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState<ApplicationError | null>(null);
     const [loading, setLoading] = useState(true);
@@ -108,7 +105,7 @@ export function GroupIndexPage() {
 
     return (
         <>
-            <RootLayout breadcrumbList={breadcrumbList} title='Groups' error={error} isError={isError} setIsError={setIsError}>
+            <RootLayout title='Groups' error={error} isError={isError} setIsError={setIsError}>
                 {
                     loading ? <LoadingComponent />
                         : <CrudTableComponent 

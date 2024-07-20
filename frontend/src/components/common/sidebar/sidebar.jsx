@@ -2,7 +2,7 @@
 
 import { Sidebar } from 'flowbite-react';
 import { HiChartPie, HiUser, HiCog } from 'react-icons/hi';
-import { useAuth } from '../../../hooks/AuthContext.hooks';
+import { useAuth } from '../../../hooks/Auth.hooks';
 
 const SidebarComponent = () => {
     const { loggedUser } = useAuth();
