@@ -1,6 +1,6 @@
 import { ErrorNotFoundComponent } from "../components/common/error/404";
 import RootLayout from "../components/layouts/layout";
-import { useAuth } from "../hooks/AuthContext"
+import { useAuth } from "../hooks/AuthContext.hooks"
 
 export function ErrorNotFoundPage() {
     const { isLoggedIn } = useAuth();

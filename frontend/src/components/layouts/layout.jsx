@@ -2,17 +2,15 @@ import { ThemeModeScript, Flowbite } from 'flowbite-react';
 import SidebarComponent from '../common/sidebar/sidebar'
 import NavbarComponent from '../common/navbar/navbar';
 import FooterComponent from '../common/footer/footer';
-import BreadcrumbComponent from '../common/breadcrumb';
 import PageTitleComponent from '../common/pageTitle';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext.hooks';
 import { Navigate } from 'react-router-dom';
-import ErrorModalComponent, { ApplicationError } from '../common/error';
+import ErrorModalComponent from '../common/error';
 import DashboardCards from '../../pages/dashboard/dashboards';
 import DashboardComponent from '../../pages/dashboard/detail_components';
 
 const RootLayout = (
     {children, 
-    breadcrumbList, 
     title, 
     error, 
     isError, 

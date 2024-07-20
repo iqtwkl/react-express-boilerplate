@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
 import { AuthAPI } from '../../services/api/auth';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext.hooks';
 import ErrorModalComponent, { ApplicationError } from "../../components/common/error";
 import { HiOutlineUser,HiOutlineKey } from 'react-icons/hi';
 import { SVGProps } from 'react';

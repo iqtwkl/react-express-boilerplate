@@ -2,7 +2,7 @@
 'use client';
 
 import { Avatar, Dropdown, Navbar, DarkThemeToggle, TextInput, Label } from 'flowbite-react';
-import { useAuth } from '../../../hooks/AuthContext';
+import { useAuth } from '../../../hooks/AuthContext.hooks';
 
 const NavbarComponent = () => {
   const { logout, loggedUser } = useAuth();

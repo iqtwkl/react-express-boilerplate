@@ -3,7 +3,7 @@ import RootLayout from "../../components/layouts/layout";
 import { ApplicationError } from "../../components/common/error";
 import LoadingComponent from "../../components/common/loading";
 import { AccountAPI } from "../../services/api/account";
-import { useAuth } from "../../hooks/AuthContext";
+import { useAuth } from "../../hooks/AuthContext.hooks";
 import { AccountInterface } from "../../components/entity/account";
 import { ProfileComponent } from "../../components/common/profile";
 

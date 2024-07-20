@@ -1,7 +1,6 @@
 import { Button, Label, Modal, TextInput, Toast } from "flowbite-react";
 import { HiCheck, } from "react-icons/hi";
 import { GroupInterface } from "../../components/entity/group";
-import { useState } from "react";
 
 interface ModalProps {
     isOpen: boolean,

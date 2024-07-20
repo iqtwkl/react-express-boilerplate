@@ -4,7 +4,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { useEffect, useState } from 'react';
 import LoadingComponent from '../../components/common/loading';
 import { AccountAPI } from '../../services/api/account';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext.hooks';
 import { AccountInterface } from '../../components/entity/account';
 import { CreateModal, DeleteModal, EditModal } from './modal';
 import CrudTableComponent from '../../components/common/table/crud';

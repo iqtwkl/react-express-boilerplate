@@ -1,32 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AccountSessionInterface } from '../components/entity/account';
 import { jwtDecode } from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext.context';
 
 interface AuthProviderProps {
     children: React.ReactNode;
 }
-
-type AuthContextType = {
-    isLoggedIn: boolean;
-    setLoggedIn: (loggedIn: boolean) => void;
-    token: string;
-    setToken: (token: string) => void;
-    loggedUser: AccountSessionInterface;
-    setLoggedUser: (loggedUser: AccountSessionInterface) => void;
-    logout: () => void;
-    setUserFromToken: (token: string) => void;
-};
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
-};
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {

@@ -1,7 +1,7 @@
 // import '../App.css';
 import { Navigate } from 'react-router-dom';
 import RootLayout from '../components/layouts/layout';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../hooks/AuthContext.hooks';
 import { useState } from 'react';
 import { ApplicationError } from '../components/common/error';
 

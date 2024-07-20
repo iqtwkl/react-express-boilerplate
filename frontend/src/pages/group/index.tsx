@@ -3,7 +3,7 @@ import { ApplicationError } from '../../components/common/error';
 import RootLayout from '../../components/layouts/layout';
 import LoadingComponent from '../../components/common/loading';
 import { GroupAPI } from '../../services/api/group';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext.hooks';
 import { GroupInterface } from '../../components/entity/group';
 import { Button } from 'flowbite-react';
 import { 
