@@ -60,8 +60,8 @@ export function AccountIndexPage() {
             } else {
                 throw new ApplicationError(500, 'No Account Selected');
             }
-        } catch (error: any) {
-            setError(error);
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
             setIsError(true);
             setIsEdit(false);
         } finally {
@@ -83,8 +83,8 @@ export function AccountIndexPage() {
             } else {
                 throw new ApplicationError(500, 'No Account Selected');
             }
-        } catch (error: any) {
-            setError(error);
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
             setIsError(true);
             setIsDelete(false);
         } finally {
@@ -106,8 +106,8 @@ export function AccountIndexPage() {
             } else {
                 throw new ApplicationError(500, 'No Account Set');
             }
-        } catch (error: any) {
-            setError(error);
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
             setIsError(true);
             setIsCreate(false);
         } finally {
@@ -124,8 +124,8 @@ export function AccountIndexPage() {
         try {
             const response = await api.getAll(1,10,search,search_by);
             setAccounts(response);
-        } catch (error: any) {
-            setError(error);
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
             setIsError(true);
         } finally {
             setLoading(false);
@@ -146,11 +146,39 @@ export function AccountIndexPage() {
         <>
             <RootLayout breadcrumbList={breadcrumbList} title='Account' error={error} isError={isError} setIsError={setIsError}>
                 {
-                    loading ? <LoadingComponent/> : <CrudTableComponent columnConfig={columnConfig} data={accounts} setIsCreate={setIsCreate} />
+                    loading ? <LoadingComponent/> 
+                    : <CrudTableComponent 
+                        columnConfig={columnConfig} 
+                        data={accounts} 
+                        setIsCreate={setIsCreate} 
+                    />
                 }
-                <CreateModal isOpen={isCreate} setIsOpen={setIsCreate} handleSave={handleCreated} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
-                <EditModal isOpen={isEdit} setIsOpen={setIsEdit} account={account} handleSave={handleEdited} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount}/>
-                <DeleteModal isOpen={isDelete} setIsOpen={setIsDelete} account={account} handleSave={handleDeleted} isSuccess={isSuccess} setIsSuccess={setIsSuccess} setAccount={setAccount} />
+                <CreateModal 
+                    isOpen={isCreate} 
+                    setIsOpen={setIsCreate} 
+                    handleSave={handleCreated} 
+                    isSuccess={isSuccess} 
+                    setIsSuccess={setIsSuccess} 
+                    setAccount={setAccount}
+                />
+                <EditModal 
+                    isOpen={isEdit} 
+                    setIsOpen={setIsEdit} 
+                    account={account} 
+                    handleSave={handleEdited} 
+                    isSuccess={isSuccess} 
+                    setIsSuccess={setIsSuccess} 
+                    setAccount={setAccount}
+                />
+                <DeleteModal 
+                    isOpen={isDelete} 
+                    setIsOpen={setIsDelete} 
+                    account={account} 
+                    handleSave={handleDeleted} 
+                    isSuccess={isSuccess} 
+                    setIsSuccess={setIsSuccess} 
+                    setAccount={setAccount} 
+                />
             </RootLayout>
         </>
     )

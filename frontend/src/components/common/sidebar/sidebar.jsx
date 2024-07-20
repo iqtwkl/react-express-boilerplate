@@ -49,7 +49,7 @@ const SidebarComponent = () => {
                         </Sidebar.Item>
                         <Sidebar.Collapse icon={HiUser} label="Accounts">
                             <Sidebar.Item href="/account">Accounts</Sidebar.Item>
-                            <Sidebar.Item href="/role">Role</Sidebar.Item>
+                            <Sidebar.Item href="/group">Group</Sidebar.Item>
                         </Sidebar.Collapse>
                         <Sidebar.Item href="/connection" icon={HiCog}>
                             Connection

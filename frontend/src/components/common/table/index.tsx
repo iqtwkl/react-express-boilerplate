@@ -32,7 +32,6 @@ const TableComponent = (props: ITableProps) => {
   };
 
   if (data === undefined || !data || data.length === 0) {
-    console.log('masuk sini');
     return <p>No data available.</p>;
   }
 

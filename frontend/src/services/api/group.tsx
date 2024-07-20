@@ -52,7 +52,7 @@ export class GroupAPI extends AuthorizedAPIRequest{
     }
 
     async create(account: GroupInterface): Promise<GroupInterface> {
-        const url = `${this.URL}/`;
+        const url = `${this.URL}`;
 
         const response = await this.makeRequest(url, 'post', account);
         return response.data;
