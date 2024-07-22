@@ -10,6 +10,7 @@ import { DashboardDetailPage } from './pages/dashboard/detail';
 import { ErrorNotFoundPage } from './pages/404';
 import { ConnectionPage } from './pages/connection';
 import { AppStateProvider } from './hooks/AppState.provider';
+import { CrudStateProvider } from './hooks/CrudState.provider';
 
 function App() {
   return (
@@ -21,7 +22,11 @@ function App() {
             <Route path="/auth/login" element={<LoginPage/>} />
             <Route path="/account" element={<AccountIndexPage/>} />
             <Route path="/account/profile" element={<ProfilePage/>} />
-            <Route path="/group" element={<GroupIndexPage/>} />
+            <Route path="/group" element={
+                <CrudStateProvider>
+                  <GroupIndexPage/>
+                </CrudStateProvider>
+              } />
             <Route path="/dashboard/:id" element={<DashboardDetailPage/>} />
             <Route path="/connection" element={<ConnectionPage/>} />
             <Route path="*" element={<ErrorNotFoundPage/>} />

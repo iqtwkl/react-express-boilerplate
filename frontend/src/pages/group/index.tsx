@@ -5,27 +5,24 @@ import LoadingComponent from '../../components/common/loading';
 import { GroupAPI } from '../../services/api/group';
 import { useAuth } from '../../hooks/Auth.hooks';
 import { GroupInterface } from '../../components/entity/group';
-import { Button } from 'flowbite-react';
-import { 
-    AiFillEdit, 
-    AiFillDelete, 
-    AiOutlineUserAdd, 
-    AiTwotoneDashboard 
-} from "react-icons/ai";
 import CrudTableComponent from '../../components/common/table/crud';
-import { CreateModal } from './modal';
+import { CreateModal, DeleteModal, EditModal } from './modal';
 import { useAppState } from '../../hooks/AppState.hooks';
+import { useCrudState } from '../../hooks/CrudState.hooks';
+import { crudAction, otherAction } from './action';
 
 export function GroupIndexPage() {
-    const { setError, setIsError } = useAppState()
+    const { setError, setIsError } = useAppState();
     const [loading, setLoading] = useState(true);
+    const { 
+        setIsCreate, setIsSuccess,
+        setIsDelete, setIsEdit
+    } = useCrudState();
 
     const { token } = useAuth();
     const api = new GroupAPI(token);
 
     const [data, setData] = useState<GroupInterface[]>([]);
-    const [ isCreate, setIsCreate ] = useState(false);
-    const [ isSuccess, setIsSuccess ] = useState(false);
     const [ group, setGroup ] = useState<GroupInterface | undefined>(undefined);
 
     const getData = async (search = '', searchBy = '') => {
@@ -64,41 +61,61 @@ export function GroupIndexPage() {
         }
     }
 
+    const handleEdited = async () => {
+        try {
+            if (group) {
+                const response = await api.update(group.id, group);
+                setGroup(response);
+                setIsSuccess(true);
+                getData();
+            } else {
+                throw new ApplicationError(500, 'Group not edited');
+            }
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
+            setIsError(true);
+            setIsCreate(false);
+        } finally {
+            setGroup(undefined);
+            setTimeout(() => {
+                setIsSuccess(false);
+                setIsEdit(false);
+            }, 1234);
+        }
+    }
+
+    const handleDeleted = async () => {
+        try {
+            if (group) {
+                const response = await api.delete(group.id);
+                setGroup(response);
+                setIsSuccess(true);
+                getData();
+            } else {
+                throw new ApplicationError(500, 'No Account Selected');
+            }
+        } catch (error: unknown) {
+            setError(error as ApplicationError);
+            setIsError(true);
+            setIsDelete(false);
+        } finally {
+            setGroup(undefined);
+            setTimeout(() => {
+                setIsSuccess(false);
+                setIsDelete(false);
+            }, 1234);
+        }
+    }
+
     useEffect(() => {
         getData();
     }, []);
-
-    const crudAction = (group: GroupInterface) => {
-        return (
-            <div className='flex justify-end'>
-                <Button pill outline className="mr-2" onClick={() => { }}>
-                    <AiFillEdit className="h-4 w-4" />
-                </Button>
-                <Button pill outline color="failure" onClick={() => { }}>
-                    <AiFillDelete className="h-4 w-4" />
-                </Button>
-            </div>
-        );
-    };
-
-    const otherAction = (group: GroupInterface) => {
-        return (
-            <div className='flex justify-end'>
-                <Button pill outline className="mr-2" onClick={() => { }}>
-                    <AiOutlineUserAdd className="h-4 w-4" />
-                </Button>
-                <Button pill outline onClick={() => { }}>
-                    <AiTwotoneDashboard className="h-4 w-4" />
-                </Button>
-            </div>
-        );
-    };
 
 
     const columnConfig = [
         { header: 'Group Name', accessor: 'name', asIs: false },
         { header: '', body: otherAction, asIs: true },
-        { header: '', body: crudAction, asIs: true }
+        { header: '', body: (group: GroupInterface) => crudAction(group, setGroup), asIs: true }
     ];
 
     return (
@@ -113,12 +130,18 @@ export function GroupIndexPage() {
                         />
                 }
                 <CreateModal 
-                    isOpen={isCreate} 
-                    setIsOpen={setIsCreate} 
                     handleSave={handleCreated} 
-                    isSuccess={isSuccess} 
-                    setIsSuccess={setIsSuccess} 
                     setGroup={setGroup}
+                />
+                <EditModal
+                    handleSave={handleEdited}
+                    group={group}
+                    setGroup={setGroup} 
+                />
+                <DeleteModal
+                    handleSave={handleDeleted}
+                    group={group}
+                    setGroup={setGroup} 
                 />
             </RootLayout>
         </>

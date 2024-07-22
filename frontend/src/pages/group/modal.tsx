@@ -1,24 +1,22 @@
 import { Button, Label, Modal, TextInput, Toast } from "flowbite-react";
-import { HiCheck, } from "react-icons/hi";
+import { HiCheck, HiExclamation, HiOutlineExclamationCircle } from "react-icons/hi";
 import { GroupInterface } from "../../components/entity/group";
+import { useCrudState } from "../../hooks/CrudState.hooks";
 
 interface ModalProps {
-    isOpen: boolean,
-    setIsOpen: (isOpen: boolean) => void,  
     handleSave: () => void,
     group?: GroupInterface,
     setGroup: (group: GroupInterface | undefined) => void,
-    isSuccess: boolean,
-    setIsSuccess: (isSuccess: boolean) => void,
 }
 
 export const CreateModal = (props: ModalProps) => {
-    const { isOpen, setIsOpen, handleSave, isSuccess, setIsSuccess, setGroup } = props;
+    const { setGroup, handleSave } = props;
+    const { isCreate, setIsCreate, isSuccess, setIsSuccess } = useCrudState();
     let group: GroupInterface | any = {};
 
     const handleClose = () => {
         setIsSuccess(false);
-        setIsOpen(false);
+        setIsCreate(false);
         setGroup(undefined);
     }
 
@@ -34,7 +32,7 @@ export const CreateModal = (props: ModalProps) => {
 
     return (
         <>
-            <Modal show={isOpen} onClose={handleClose}>
+            <Modal show={isCreate} onClose={handleClose}>
                 <Modal.Header>
                     <h3>Add Group</h3>
                 </Modal.Header>
@@ -62,6 +60,115 @@ export const CreateModal = (props: ModalProps) => {
                         <Button
                         color="warning" onClick={handleSave}>
                             Save
+                        </Button>
+                        <Button
+                        color="gray" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </>
+    )
+}
+
+export const EditModal = (props: ModalProps) => {
+    const { handleSave, group, setGroup } = props;
+    const { isEdit, setIsEdit, isSuccess, setIsSuccess } = useCrudState();
+
+    const handleClose = () => {
+        setIsSuccess(false);
+        setIsEdit(false);
+        setGroup(undefined);
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        const editedAccount = (prevState: GroupInterface) => ({
+            ...prevState,
+            [name]: value
+        });
+        setGroup(editedAccount);
+    };
+
+    return (
+        <>
+            <Modal show={isEdit} onClose={handleClose}>
+            <Modal.Header>
+                    <h3>Edit Group {group?.name}</h3>
+                </Modal.Header>
+                <Modal.Body>
+                    { isSuccess && (
+                        <Toast>
+                            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+                                <HiCheck className="h-5 w-5" />
+                            </div>
+                            <div className="ml-3 text-sm font-normal">Item add successfully.</div>
+                            <Toast.Toggle />
+                        </Toast>
+                    )}
+                    <div className="grid gap-4 mb-4 sm:grid-cols-1">
+                        <div>
+                            <Label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</Label>
+                            <TextInput 
+                                name="name" 
+                                className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Name" value={group?.name} onChange={(e) => handleChange(e)}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex justify-end gap-4">
+                        <Button
+                        color="warning" onClick={handleSave}>
+                            Save
+                        </Button>
+                        <Button
+                        color="gray" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </>
+    )
+}
+
+export const DeleteModal = (props: ModalProps) => {
+    const { handleSave, group, setGroup } = props;
+    const { isDelete, setIsDelete, isSuccess, setIsSuccess } = useCrudState();
+
+    const handleClose = () => {
+        setIsSuccess(false);
+        setIsDelete(false);
+        setGroup(undefined);
+    }
+
+    return (
+        <>
+            <Modal show={isDelete} onClose={handleClose}>
+                <Modal.Header>
+                    <h3>Delete Account {group?.name}</h3>
+                </Modal.Header>
+                <Modal.Body>
+                    { isSuccess && (
+                        <Toast>
+                            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+                                <HiExclamation className="h-5 w-5" />
+                            </div>
+                            <div className="ml-3 text-sm font-normal">Item deleted successfully.</div>
+                            <Toast.Toggle />
+                        </Toast>
+                    )}
+                    <div className="text-center mb-4">
+                        <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                        <h3 className="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">
+                            Are you sure Delete Group {group?.name} ?
+                        </h3>
+                    </div>
+                    <div className="flex justify-center gap-4 pt-4">
+                        <Button
+                        color="failure" onClick={handleSave}>
+                            Delete
                         </Button>
                         <Button
                         color="gray" onClick={handleClose}>
