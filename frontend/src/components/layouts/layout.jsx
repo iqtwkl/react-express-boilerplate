@@ -8,7 +8,6 @@ import { Navigate } from 'react-router-dom';
 import ErrorModalComponent, { ErrorModalCtxComponent } from '../common/error';
 import DashboardCards from '../../pages/dashboard/dashboards';
 import DashboardComponent from '../../pages/dashboard/detail_components';
-import { useAppState } from '../../hooks/AppState.hooks';
 
 const RootLayout = (
     {children,
