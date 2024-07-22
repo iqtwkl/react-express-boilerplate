@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Label, Modal, TextInput, Toast } from "flowbite-react";
 import { AccountInterface } from "../../components/entity/account";
 import { HiCheck, HiExclamation, HiOutlineExclamationCircle } from "react-icons/hi";

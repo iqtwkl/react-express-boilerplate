@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
 import { AuthAPI } from '../../services/api/auth';

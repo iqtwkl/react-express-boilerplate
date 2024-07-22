@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table } from "flowbite-react";
+import React from "react";
 
 interface IMapper {
   header: string,
