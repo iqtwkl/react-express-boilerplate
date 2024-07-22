@@ -26,7 +26,7 @@ export class Profile {
     @Column()
     accountId: string;
 
-    @OneToOne(() => Account, account => account.profile)
+    @OneToOne(() => Account, account => account.profile, { onDelete: "CASCADE"})
     @JoinColumn({ name: "accountId" })
     account: Account;
 
