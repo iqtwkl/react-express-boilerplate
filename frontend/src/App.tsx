@@ -20,7 +20,11 @@ function App() {
           <Routes>
             <Route path="/" element={<IndexPage />} />
             <Route path="/auth/login" element={<LoginPage/>} />
-            <Route path="/account" element={<AccountIndexPage/>} />
+            <Route path="/account" element={
+              <CrudStateProvider>
+                <AccountIndexPage/>
+              </CrudStateProvider>
+            } />
             <Route path="/account/profile" element={<ProfilePage/>} />
             <Route path="/group" element={
                 <CrudStateProvider>

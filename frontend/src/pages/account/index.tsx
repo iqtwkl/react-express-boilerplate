@@ -9,6 +9,7 @@ import { AccountInterface } from '../../components/entity/account';
 import { CreateModal, DeleteModal, EditModal } from './modal';
 import CrudTableComponent from '../../components/common/table/crud';
 import { ApplicationError } from '../../components/common/error';
+import { useCrudState } from '../../hooks/CrudState.hooks';
 
 export function AccountIndexPage() {
     const [isError, setIsError] = useState(false);
@@ -16,10 +17,10 @@ export function AccountIndexPage() {
     const [loading, setLoading] = useState(true);
     const [accounts, setAccounts] = useState<AccountInterface[]>([]);
     const { token } = useAuth();
-    const [ isCreate, setIsCreate ] = useState(false);
-    const [ isEdit, setIsEdit ] = useState(false);
-    const [ isDelete, setIsDelete ] = useState(false);
-    const [ isSuccess, setIsSuccess ] = useState(false);
+    const { 
+        setIsCreate, setIsEdit, 
+        setIsDelete, setIsSuccess
+    } = useCrudState();
     const [ account, setAccount ] = useState<AccountInterface | undefined>(undefined);
     const api = new AccountAPI(token);
 
@@ -150,29 +151,17 @@ export function AccountIndexPage() {
                     />
                 }
                 <CreateModal 
-                    isOpen={isCreate} 
-                    setIsOpen={setIsCreate} 
-                    handleSave={handleCreated} 
-                    isSuccess={isSuccess} 
-                    setIsSuccess={setIsSuccess} 
+                    handleSave={handleCreated}  
                     setAccount={setAccount}
                 />
                 <EditModal 
-                    isOpen={isEdit} 
-                    setIsOpen={setIsEdit} 
                     account={account} 
                     handleSave={handleEdited} 
-                    isSuccess={isSuccess} 
-                    setIsSuccess={setIsSuccess} 
                     setAccount={setAccount}
                 />
                 <DeleteModal 
-                    isOpen={isDelete} 
-                    setIsOpen={setIsDelete} 
                     account={account} 
-                    handleSave={handleDeleted} 
-                    isSuccess={isSuccess} 
-                    setIsSuccess={setIsSuccess} 
+                    handleSave={handleDeleted}
                     setAccount={setAccount} 
                 />
             </RootLayout>

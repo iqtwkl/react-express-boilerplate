@@ -1,40 +1,55 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Label, Modal, TextInput, Toast } from "flowbite-react";
+import { Button, Label, Modal, TextInput, Toast, ToggleSwitch } from "flowbite-react";
 import { AccountInterface } from "../../components/entity/account";
 import { HiCheck, HiExclamation, HiOutlineExclamationCircle } from "react-icons/hi";
+import React, { useState } from "react";
+import { useCrudState } from "../../hooks/CrudState.hooks";
 
 interface ModalProps {
-    isOpen: boolean,
-    setIsOpen: (isOpen: boolean) => void,  
     handleSave: () => void,
     account?: AccountInterface,
     setAccount: (account: AccountInterface | any) => void,
-    isSuccess: boolean,
-    setIsSuccess: (isSuccess: boolean) => void,
 }
 
 export const CreateModal = (props: ModalProps) => {
-    const { isOpen, setIsOpen, handleSave, isSuccess, setIsSuccess, setAccount } = props;
-    let account: AccountInterface | any = {};
+    const { handleSave, setAccount: parentSetAccount } = props;
+    const { isCreate, setIsCreate, isSuccess, setIsSuccess } = useCrudState();
+    const [account, setAccount] = useState<AccountInterface | any>({
+        username: '',
+        email: '',
+        password: '',
+        is_admin: 0
+    });
 
     const handleClose = () => {
         setIsSuccess(false);
-        setIsOpen(false);
+        setIsCreate(false);
         setAccount(undefined);
+        parentSetAccount(undefined);
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        account = (prevState: AccountInterface) => ({
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | boolean) => {
+        let name: string;
+        let value: any;
+
+        if (typeof e === 'boolean') {
+            name = 'is_admin';
+            value = e ? 1 : 0;
+        } else if (e && e.target) {
+            name = e.target.name;
+            value = e.target.value;
+        }
+        setAccount((prevState: AccountInterface) => ({
             ...prevState,
             [name]: value
-        })
-        setAccount(account);
+        }));
+
+        parentSetAccount(account);
     }
 
     return (
         <>
-            <Modal show={isOpen} onClose={handleClose}>
+            <Modal show={isCreate} onClose={handleClose}>
                 <Modal.Header>
                     <h3>Add Account</h3>
                 </Modal.Header>
@@ -75,6 +90,10 @@ export const CreateModal = (props: ModalProps) => {
                                 placeholder="Password" value={account?.password} onChange={(e) => handleChange(e)}
                             />
                         </div>
+                        <div>
+                            <span>{account?.is_admin == 1 ? "true" : "false"}</span>
+                            <ToggleSwitch checked={account?.is_admin === 1} label="Is Admin?" onChange={() => handleChange(account.is_admin === 0)} /> 
+                        </div>
                     </div>
                     <div className="flex justify-end gap-4">
                         <Button
@@ -93,16 +112,26 @@ export const CreateModal = (props: ModalProps) => {
 }
 
 export const EditModal = (props: ModalProps) => {
-    const { isOpen, setIsOpen, handleSave, account, setAccount, isSuccess, setIsSuccess } = props;
+    const { handleSave, account, setAccount } = props;
+    const { isEdit, setIsEdit, isSuccess, setIsSuccess} = useCrudState();
 
     const handleClose = () => {
         setIsSuccess(false);
-        setIsOpen(false);
+        setIsEdit(false);
         setAccount(undefined);
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | boolean) => {
+        let name: string;
+        let value: any;
+
+        if (typeof e === 'boolean') {
+            name = 'is_admin';
+            value = e ? 1 : 0;
+        } else if (e && e.target) {
+            name = e.target.name;
+            value = e.target.value;
+        }
         const editedAccount = (prevState: AccountInterface) => ({
             ...prevState,
             [name]: value
@@ -112,7 +141,7 @@ export const EditModal = (props: ModalProps) => {
 
     return (
         <>
-            <Modal show={isOpen} onClose={handleClose}>
+            <Modal show={isEdit} onClose={handleClose}>
                 <Modal.Header>
                     <h3>Edit Account {account?.username}</h3>
                 </Modal.Header>
@@ -144,6 +173,9 @@ export const EditModal = (props: ModalProps) => {
                                 placeholder="Email" value={account?.email} onChange={(e) => handleChange(e)}
                             />
                         </div>
+                        <div>
+                            <ToggleSwitch checked={account?.is_admin == 1 ? true : false} label="Is Admin?" onChange={(e) => handleChange(e)} /> 
+                        </div>
                     </div>
                     <div className="flex justify-end gap-4">
                         <Button
@@ -163,17 +195,18 @@ export const EditModal = (props: ModalProps) => {
 
 
 export const DeleteModal = (props: ModalProps) => {
-    const { isOpen, setIsOpen, handleSave, account, setAccount, isSuccess, setIsSuccess } = props;
+    const { handleSave, account, setAccount } = props;
+    const { isDelete, setIsDelete, isSuccess, setIsSuccess } = useCrudState();
 
     const handleClose = () => {
         setIsSuccess(false);
-        setIsOpen(false);
+        setIsDelete(false);
         setAccount(undefined);
     }
 
     return (
         <>
-            <Modal show={isOpen} onClose={handleClose}>
+            <Modal show={isDelete} onClose={handleClose}>
                 <Modal.Header>
                     <h3>Delete Account {account?.username}</h3>
                 </Modal.Header>
