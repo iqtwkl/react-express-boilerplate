@@ -37,7 +37,8 @@ export class AuthController {
                 id: account.id, 
                 username: account.username, 
                 email: account.email, 
-                fullName: account.profile ? account.profile.fullName : null
+                fullName: account.profile ? account.profile.fullName : null,
+                is_admin: account.is_admin === 1 ? true : false
             });
 
             res.status(200).json({

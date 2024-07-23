@@ -1,10 +1,7 @@
-import { AccountRepositoryInterface, AccountInterface } from "../interfaces/account";
 import { AuthRepositoryInterface } from "../interfaces/auth";
 import { Account } from "../models/Account";
 import { dbDataSource } from "../configs/db.config";
 import { encrypt } from "../utils/encriptor";
-import {v4 as uuidv4} from 'uuid';
-import { dbUtils } from '../utils/db';
 import nodemailer from 'nodemailer';
 import jwt from "jsonwebtoken";
 const { 
@@ -25,7 +22,8 @@ export class AuthService implements AuthRepositoryInterface {
             id: account.id, 
             username: account.username, 
             email: account.email, 
-            fullName: account.profile ? account.profile.fullName : null
+            fullName: account.profile ? account.profile.fullName : null,
+            is_admin: account.is_admin === 1 ? true : false
         });
         const resetUrl = `${BASE_URL}/reset_password?token=${token}`
 

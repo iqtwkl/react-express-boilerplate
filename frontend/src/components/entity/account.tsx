@@ -14,6 +14,7 @@ export interface AccountSessionInterface {
     username: string;
     fullName: string;
     email: string;
+    is_admin: boolean;
 }
 
 export interface ProfileInterface {

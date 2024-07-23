@@ -21,7 +21,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             id: '0', 
             username: 'Guest', 
             fullName: 'Guest User', 
-            email: 'guest@user.com'
+            email: 'guest@user.com',
+            is_admin: false,
         }
     );
 
@@ -31,7 +32,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 id: '0', 
                 username: 'Guest', 
                 fullName: 'Guest User', 
-                email: 'guest@user.com'
+                email: 'guest@user.com',
+                is_admin: false,
             });
         }
 
@@ -40,11 +42,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             id: tokenPayload.id, 
             username: tokenPayload.username, 
             fullName: tokenPayload.fullName, 
-            email: tokenPayload.email
+            email: tokenPayload.email,
+            is_admin: tokenPayload.is_admin,
         });
     }
 
     useEffect(() => {
+        localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
+    }, [isLoggedIn]);
+
+    useEffect(() => {
+        localStorage.setItem('token', token);
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
         if (storedIsLoggedIn) {
             setIsLoggedIn(JSON.parse(storedIsLoggedIn));
@@ -55,14 +63,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             setToken(storedToken);
             setUserFromToken(storedToken);
         }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-    }, [isLoggedIn]);
-
-    useEffect(() => {
-        localStorage.setItem('token', token);
     }, [token]);
 
     const logout = () => {

@@ -1,17 +1,17 @@
-import { ErrorNotFoundComponent } from "../components/common/error/404";
+import { ErrorUnauthorizedComponent } from "../components/common/error/403";
 import RootLayout from "../components/layouts/layout";
 import { useAuth } from "../hooks/Auth.hooks"
 
-export function ErrorNotFoundPage() {
+export function ErrorUnauthorizedPage() {
     const { isLoggedIn } = useAuth();
     return (
         <>
             {isLoggedIn ?
                 <RootLayout title="">
-                    <ErrorNotFoundComponent />
+                    <ErrorUnauthorizedComponent />
                 </RootLayout>
                 :
-                <ErrorNotFoundComponent />
+                <ErrorUnauthorizedComponent />
             } 
                 
         </>
