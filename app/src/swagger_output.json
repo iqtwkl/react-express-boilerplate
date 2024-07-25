@@ -2730,8 +2730,13 @@
         "type": "object",
         "properties": {
           "accountId": {
-            "type": "string",
-            "example": "uuid-hash"
+            "type": "array",
+            "example": [
+              "uuid-hash"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -2788,8 +2793,13 @@
         "type": "object",
         "properties": {
           "dashboardId": {
-            "type": "string",
-            "example": "uuid-hash"
+            "type": "array",
+            "example": [
+              "uuid-hash"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
